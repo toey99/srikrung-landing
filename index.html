@@ -3,118 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ประกันรถยนต์ราคาพิเศษ | ซื้อเองได้ ไม่ต้องผ่านเซลล์ | Sri Krung 724</title>
+    <title>ซื้อประกันรถยนต์ออนไลน์ ราคาพิเศษ | ไม่ผ่านเซลล์ | Sri Krung 724</title>
     <meta name="description" content="ซื้อประกันรถยนต์ออนไลน์ราคาพิเศษผ่าน Sri Krung 724 ซื้อเองได้ ไม่โดนกดดัน มีผู้ช่วยให้คำปรึกษาผ่านไลน์ 24/7">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --primary: #0056b3;
-            --primary-dark: #003d80;
-            --accent: #ff6b35;
-            --bg-gray: #f5f7fa;
+            --primary: #1e4a8c;
+            --primary-light: #2d5aa0;
+            --accent: #e85a3d;
+            --bg-light: #f8f9fa;
+            --bg-gray: #f0f2f5;
             --text-dark: #1a1a2e;
             --text-gray: #5a5a5a;
+            --border: #e0e0e0;
         }
         body { 
             font-family: 'Sukhumvit Set', 'Kanit', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6; 
             color: var(--text-dark);
-            background: var(--bg-gray);
+            background: var(--bg-light);
         }
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        .hero { 
-            background: white; 
-            border-radius: 8px; 
-            padding: 50px 40px; 
-            text-align: center;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
-            margin-top: 20px;
-            border-top: 4px solid var(--primary);
-        }
-        h1 { 
-            font-size: 1.8rem; 
-            color: var(--text-dark); 
-            margin-bottom: 15px;
-            line-height: 1.4;
-            font-weight: 700;
-        }
-        .highlight { color: var(--accent); font-weight: bold; }
-        .subheadline { 
-            font-size: 1.05rem; 
-            color: var(--text-gray); 
-            margin-bottom: 30px;
-        }
-        .benefits { 
-            background: white; 
-            border-radius: 8px; 
-            padding: 40px; 
-            margin: 20px 0;
-            text-align: left;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
-        }
-        .benefits h2 { 
-            color: var(--primary); 
-            margin-bottom: 25px;
-            text-align: center;
-            font-size: 1.4rem;
-        }
-        .benefit-item { 
-            display: flex; 
-            align-items: flex-start; 
-            margin-bottom: 20px;
-            padding: 20px;
-            background: var(--bg-gray);
-            border-radius: 6px;
-            border-left: 3px solid var(--primary);
-        }
-        .benefit-icon { 
-            font-size: 1.8rem; 
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-        .benefit-text h3 { 
-            color: var(--text-dark); 
-            margin-bottom: 5px;
-            font-size: 1.1rem;
-        }
-        .benefit-text p { color: var(--text-gray); font-size: 0.95rem; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
         
-        .cta-section { 
-            background: var(--primary);
-            border-radius: 8px;
-            padding: 40px;
+        /* Hero Section */
+        .hero { 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 12px; 
+            padding: 60px 40px; 
             text-align: center;
             color: white;
-            margin: 20px 0;
+            margin-top: 10px;
         }
-        .cta-section h2 { margin-bottom: 15px; font-size: 1.4rem; }
+        h1 { 
+            font-size: 2.2rem; 
+            margin-bottom: 20px;
+            line-height: 1.3;
+            font-weight: 700;
+        }
+        .highlight { color: #ffd700; font-weight: bold; }
+        .subheadline { 
+            font-size: 1.15rem; 
+            opacity: 0.95;
+            margin-bottom: 35px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
         .cta-buttons { 
             display: flex; 
             gap: 15px; 
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 25px;
         }
         .btn { 
-            padding: 15px 35px; 
-            border-radius: 6px; 
+            padding: 16px 40px; 
+            border-radius: 8px; 
             text-decoration: none; 
             font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.2s;
+            font-size: 1.05rem;
+            transition: all 0.3s;
             display: inline-block;
         }
         .btn:hover { 
             transform: translateY(-2px); 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         }
         .btn-primary { 
             background: var(--accent); 
             color: white;
         }
-        .btn-primary:hover {
-            background: #e55a2b;
-        }
+        .btn-primary:hover { background: #d54a2e; }
         .btn-secondary { 
             background: transparent; 
             color: white;
@@ -124,128 +82,507 @@
             background: white;
             color: var(--primary);
         }
-        .trust { 
-            background: white; 
-            border-radius: 8px; 
-            padding: 40px; 
+        
+        /* Trust Partners Section */
+        .trust-partners {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin: 25px 0;
             text-align: center;
-            margin-top: 20px;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.06);
         }
-        .trust h3 { color: var(--text-dark); margin-bottom: 25px; font-size: 1.2rem; }
-        .trust-items { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
-        .trust-item { text-align: center; }
-        .trust-item .icon { font-size: 2.2rem; margin-bottom: 10px; }
-        .contact { 
-            background: var(--text-dark); 
-            color: white; 
+        .trust-partners h2 {
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        .partner-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .partner-logo {
+            background: var(--bg-light);
+            padding: 15px 25px;
             border-radius: 8px;
-            padding: 35px;
-            text-align: center;
-            margin-top: 20px;
+            font-weight: 600;
+            color: var(--text-gray);
+            border: 1px solid var(--border);
+            min-width: 120px;
         }
-        .contact h3 { margin-bottom: 15px; color: white; }
-        .contact-info { font-size: 1.1rem; margin: 10px 0; }
-        .contact a { color: #4da6ff; text-decoration: none; }
-        .footer { 
-            text-align: center; 
-            padding: 25px; 
+        
+        /* Why Choose Us Section */
+        .why-choose {
+            background: white;
+            border-radius: 12px;
+            padding: 50px 40px;
+            margin: 25px 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+        }
+        .why-choose h2 {
+            color: var(--primary);
+            margin-bottom: 35px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        .benefit-card {
+            background: var(--bg-light);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+        }
+        .benefit-card h3 {
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        .benefit-card p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+        .expert-profile {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        .expert-avatar {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        .expert-info h3 {
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .expert-info p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+        .license-badge {
+            background: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        /* Product Details Section */
+        .product-details {
+            background: white;
+            border-radius: 12px;
+            padding: 50px 40px;
+            margin: 25px 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+        }
+        .product-details h2 {
+            color: var(--primary);
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.95rem;
+        }
+        .comparison-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        .comparison-table tr:nth-child(even) {
+            background: var(--bg-light);
+        }
+        .comparison-table tr:hover {
+            background: #e8f0fe;
+        }
+        .coverage-yes { color: #28a745; font-weight: 600; }
+        .coverage-no { color: #dc3545; }
+        
+        /* Coverage Section */
+        .coverage-section {
+            margin-top: 40px;
+        }
+        .coverage-section h3 {
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .coverage-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            background: var(--bg-light);
+            border-radius: 8px;
+        }
+        .coverage-icon { color: var(--accent); font-weight: bold; }
+        
+        /* FAQ Section */
+        .faq-section {
+            background: white;
+            border-radius: 12px;
+            padding: 50px 40px;
+            margin: 25px 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+        }
+        .faq-section h2 {
+            color: var(--primary);
+            margin-bottom: 35px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding: 25px 0;
+        }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-question {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 1.05rem;
+            margin-bottom: 12px;
+        }
+        .faq-answer {
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+        
+        /* Final CTA Section */
+        .final-cta {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 12px;
+            padding: 50px 40px;
+            text-align: center;
+            color: white;
+            margin: 25px 0;
+        }
+        .final-cta h2 {
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+        }
+        .final-cta p {
+            opacity: 0.95;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background: var(--text-dark);
+            color: white;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            margin: 25px 0;
+        }
+        .contact-section h3 {
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+        }
+        .contact-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .contact-item {
+            text-align: center;
+        }
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .contact-item a {
+            color: #4da6ff;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
             color: var(--text-gray);
             font-size: 0.9rem;
         }
-        @media (max-width: 600px) {
-            h1 { font-size: 1.4rem; }
-            .hero { padding: 35px 25px; }
-            .benefits { padding: 30px 25px; }
-            .cta-buttons { flex-direction: column; }
-            .btn { width: 100%; text-align: center; }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 1.7rem; }
+            .hero { padding: 40px 25px; }
+            .why-choose, .product-details, .faq-section { padding: 35px 25px; }
+            .expert-profile { flex-direction: column; text-align: center; }
+            .comparison-table { font-size: 0.85rem; }
+            .comparison-table th, .comparison-table td { padding: 12px 10px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Hero Section -->
         <div class="hero">
-            <h1>🚗 ประกันรถยนต์ <span class="highlight">ราคาพิเศษ</span><br>ซื้อเองได้ ไม่ต้องผ่านเซลล์</h1>
-            <p class="subheadline">ผ่าน Sri Krung Broker 724 ส่วนลดพิเศษ ซื้อออนไลน์ได้ทันที<br>มีผู้ช่วยให้คำปรึกษาผ่านไลน์ 24/7</p>
-            
+            <h1>ซื้อประกันรถยนต์ออนไลน์ <span class="highlight">ราคาพิเศษ</span><br>ไม่ผ่านเซลล์ ไม่โดนกดดัน</h1>
+            <p class="subheadline">ผ่านระบบ 724 ของศรีกรุงโบรคเกอร์ ซื้อเองได้ทันที<br>มีผู้ช่วยให้คำปรึกษาผ่านไลน์ 24/7</p>
             <div class="cta-buttons">
-                <a href="https://lin.ee/e1Vuz3P" class="btn btn-primary">💬 แอดไลน์สอบถามฟรี</a>
-                <a href="https://insure.724.co.th/u/AM00441133" class="btn btn-secondary">🛒 ซื้อเลยตอนนี้</a>
+                <a href="https://insure.724.co.th/u/AM00441133" class="btn btn-primary">🛒 ซื้อประกันเลย</a>
+                <a href="https://lin.ee/e1Vuz3P" class="btn btn-secondary">💬 ปรึกษาฟรีทางไลน์</a>
             </div>
         </div>
 
-        <div class="benefits">
+        <!-- Trust Partners Section -->
+        <div class="trust-partners">
+            <h2>🤝 บริษัทประกันภัยชั้นนำที่ร่วมรายการ</h2>
+            <div class="partner-logos">
+                <div class="partner-logo">724</div>
+                <div class="partner-logo">วิริยะ</div>
+                <div class="partner-logo">ทิพย์</div>
+                <div class="partner-logo">ไทยวิวัฒน์</div>
+                <div class="partner-logo">อาคเนย์</div>
+                <div class="partner-logo">สินมั่นคง</div>
+            </div>
+        </div>
+
+        <!-- Why Choose Us Section -->
+        <div class="why-choose">
             <h2>✨ ทำไมต้องซื้อกับเรา?</h2>
             
-            <div class="benefit-item">
-                <div class="benefit-icon">💰</div>
-                <div class="benefit-text">
-                    <h3>ราคาพิเศษผ่าน 724</h3>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h3>💰 ราคาพิเศษผ่าน 724</h3>
                     <p>ได้ส่วนลดพิเศษเมื่อซื้อผ่านระบบ 724 ของศรีกรุงโบรคเกอร์ ประหยัดกว่าซื้อทั่วไป</p>
                 </div>
-            </div>
-            
-            <div class="benefit-item">
-                <div class="benefit-icon">😊</div>
-                <div class="benefit-text">
-                    <h3>ไม่โดนเซลล์กดดัน</h3>
+                <div class="benefit-card">
+                    <h3>😊 ไม่โดนเซลล์กดดัน</h3>
                     <p>ซื้อเองได้ ไม่ต้องคุยกับเซลล์ ไม่ถูกยัดเยียด ตัดสินใจเองตามความต้องการ</p>
                 </div>
-            </div>
-            
-            <div class="benefit-item">
-                <div class="benefit-icon">💬</div>
-                <div class="benefit-text">
-                    <h3>ผู้ช่วยส่วนตัวผ่านไลน์ 24/7</h3>
-                    <p>มีข้อสงสัย? แอดไลน์ @vax7479a ได้เลย มีผู้ช่วยให้คำปรึกษาตลอดเวลา ไม่ใช่เซลล์ขาย</p>
+                <div class="benefit-card">
+                    <h3>💬 ผู้ช่วยส่วนตัว 24/7</h3>
+                    <p>มีข้อสงสัย? แอดไลน์ @vax7479a ได้เลย มีผู้ช่วยให้คำปรึกษาตลอดเวลา</p>
                 </div>
-            </div>
-            
-            <div class="benefit-item">
-                <div class="benefit-icon">⚡</div>
-                <div class="benefit-text">
-                    <h3>ซื้อออนไลน์ได้ทันที</h3>
+                <div class="benefit-card">
+                    <h3>⚡ ซื้อออนไลน์ได้ทันที</h3>
                     <p>ไม่ต้องรอ ไม่ต้องเซ็นเอกสารยุ่งยาก ซื้อเสร็จได้กรมธรรม์ทันที</p>
                 </div>
             </div>
+            
+            <div class="expert-profile">
+                <div class="expert-avatar">👩‍💼</div>
+                <div class="expert-info">
+                    <h3>นิภาวดี ตั้งเส้ง</h3>
+                    <p>ตัวแทนศรีกรุงโบรคเกอร์ ระดับ 5 (มุ่งสู่ระดับ 1)</p>
+                    <p>ให้คำปรึกษาด้านประกันภัยรถยนต์มืออาชีพ บริการทั่วประเทศ</p>
+                    <span class="license-badge">เลขที่ใบอนุญาต: 6604014447</span>
+                </div>
+            </div>
         </div>
 
-        <div class="cta-section">
+        <!-- Product Details Section -->
+        <div class="product-details">
+            <h2>📋 เปรียบเทียบประกันรถยนต์แต่ละชั้น</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>ความคุ้มครอง</th>
+                        <th>ชั้น 1</th>
+                        <th>ชั้น 2+</th>
+                        <th>ชั้น 3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ชนแล้วหนี/ถูกชน</td>
+                        <td class="coverage-yes">✓ ครบ</td>
+                        <td class="coverage-yes">✓ ครบ</td>
+                        <td class="coverage-yes">✓ ครบ</td>
+                    </tr>
+                    <tr>
+                        <td>รถชนรถ</td>
+                        <td class="coverage-yes">✓ คุ้มครอง</td>
+                        <td class="coverage-yes">✓ คุ้มครอง</td>
+                        <td class="coverage-no">✗ ไม่คุ้ม</td>
+                    </tr>
+                    <tr>
+                        <td>รถชนสิ่งของ/คน</td>
+                        <td class="coverage-yes">✓ คุ้มครอง</td>
+                        <td class="coverage-yes">✓ คุ้มครอง</td>
+                        <td class="coverage-no">✗ ไม่คุ้ม</td>
+                    </tr>
+                    <tr>
+                        <td>ไฟไหม้/น้ำท่วม</td>
+                        <td class="coverage-yes">✓ คุ้มครอง</td>
+                        <td class="coverage-yes">✓ คุ้มครอง</td>
+                        <td class="coverage-no">✗ ไม่คุ้ม</td>
+                    </tr>
+                    <tr>
+                        <td>รถหาย/สูญหลาย</td>
+                        <td class="coverage-yes">✓ คุ้มครอง</td>
+                        <td class="coverage-no">✗ ไม่คุ้ม</td>
+                        <td class="coverage-no">✗ ไม่คุ้ม</td>
+                    </tr>
+                    <tr>
+                        <td>กระจก/อุปกรณ์เสริม</td>
+                        <td class="coverage-yes">✓ คุ้มครอง</td>
+                        <td class="coverage-no">✗ เสริม</td>
+                        <td class="coverage-no">✗ เสริม</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="coverage-section">
+                <h3>🛡️ ความคุ้มครองพื้นฐานทุกชั้น</h3>
+                <div class="coverage-grid">
+                    <div class="coverage-item">
+                        <span class="coverage-icon">✓</span>
+                        <span>คุ้มครองตาม พ.ร.บ.</span>
+                    </div>
+                    <div class="coverage-item">
+                        <span class="coverage-icon">✓</span>
+                        <span>อุบัติเหตุส่วนบุคคล</span>
+                    </div>
+                    <div class="coverage-item">
+                        <span class="coverage-icon">✓</span>
+                        <span>ค่ารักษาพยาบาล</span>
+                    </div>
+                    <div class="coverage-item">
+                        <span class="coverage-icon">✓</span>
+                        <span>การประกันตัว</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section with Schema -->
+        <div class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
+            <h2>❓ คำถามที่พบบ่อย</h2>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                <div class="faq-question" itemprop="name">ซื้อประกัน 724 ดีไหม? ต่างจากซื้อกับเซลล์ยังไง?</div>
+                <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                    <div class="faq-answer" itemprop="text">
+                        ระบบ 724 ของศรีกรุงโบรคเกอร์ช่วยให้คุณซื้อประกันเองได้โดยไม่ต้องผ่านเซลล์ ได้ส่วนลดพิเศษ และยังมีทีมงานคอยให้คำปรึกษาผ่านไลน์ตลอด 24 ชั่วโมง ไม่มีการกดดัน ไม่ถูกยัดเยียดยอดขาย
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                <div class="faq-question" itemprop="name">เคลมประกันยังไง? ไม่มีคู่กรณีเคลมได้ไหม?</div>
+                <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                    <div class="faq-answer" itemprop="text">
+                        เคลมได้ตลอด 24 ชั่วโมงผ่านเบอร์ Hotline ของบริษัทประกันที่คุณซื้อ หรือติดต่อผ่านเราได้ที่ Line @vax7479a ประกันชั้น 1 เคลมได้แม้ไม่มีคู่กรณี ประกันชั้น 2+ และ 3 ต้องมีคู่กรณีชัดเจนจึงจะเคลมได้
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                <div class="faq-question" itemprop="name">ผ่อนค่าเบี้ยประกันได้ไหม?</div>
+                <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                    <div class="faq-answer" itemprop="text">
+                        ได้ค่ะ สามารถผ่อนชำระค่าเบี้ยประกันได้ 0% นานสูงสุด 10 เดือน ผ่านบัตรเครดิตที่ร่วมรายการ (แล้วแต่เงื่อนไขของแต่ละบริษัทประกัน)
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                <div class="faq-question" itemprop="name">กรมธรรม์ออกเมื่อไหร่? ส่งทางไหน?</div>
+                <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                    <div class="faq-answer" itemprop="text">
+                        กรมธรรม์ออกทันทีหลังชำระเงิน ส่งเป็น E-policy ทางอีเมลที่คุณระบุไว้ หรือสามารถดาวน์โหลดได้จากระบบ 724 สะดวก รวดเร็ว ไม่ต้องรอเอกสารทางไปรษณีย์
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                <div class="faq-question" itemprop="name">ซื้อแล้วเปลี่ยนใจ ยกเลิกได้ไหม?</div>
+                <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                    <div class="faq-answer" itemprop="text">
+                        สามารถยกเลิกกรมธรรม์ได้ภายใน 14 วัน นับจากวันเริ่มคุ้มครอง (Free Look Period) โดยได้รับเงินคืนเต็มจำนวนหักค่าธรรมเนียมตามที่บริษัทประกันกำหนด
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                <div class="faq-question" itemprop="name">บริการของคุณครอบคลุมพื้นที่ไหนบ้าง?</div>
+                <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                    <div class="faq-answer" itemprop="text">
+                        ให้คำปรึกษาออนไลน์และบริการทั่วประเทศค่ะ ไม่ว่าคุณจะอยู่จังหวัดไหน กรุงเทพ หรือต่างจังหวัด สามารถซื้อประกันผ่านระบบออนไลน์ของเราได้ทันที มีทีมงานคอยสนับสนุนผ่าน Line @vax7479a
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final CTA Section -->
+        <div class="final-cta">
             <h2>🎯 พร้อมซื้อประกันรถยนต์ราคาพิเศษ?</h2>
-            <p>เลือกช่องทางที่สะดวกได้เลย</p>
+            <p>ซื้อเองได้ง่ายๆ ผ่านระบบ 724 หรือปรึกษาเราฟรีก่อนตัดสินใจ</p>
             <div class="cta-buttons">
-                <a href="https://lin.ee/e1Vuz3P" class="btn btn-primary">💬 คุยกับผู้ช่วยก่อน</a>
-                <a href="https://insure.724.co.th/u/AM00441133" class="btn btn-secondary">🛒 ไปซื้อเลย</a>
+                <a href="https://insure.724.co.th/u/AM00441133" class="btn btn-primary">🛒 ไปซื้อที่ 724 เลย</a>
+                <a href="https://lin.ee/e1Vuz3P" class="btn btn-secondary">💬 แอดไลน์ปรึกษาก่อน</a>
             </div>
         </div>
 
-        <div class="trust">
-            <h3>🛡️ เชื่อถือได้  backed by Sri Krung</h3>
-            <div class="trust-items">
-                <div class="trust-item">
-                    <div class="icon">🏢</div>
-                    <p>ศรีกรุงโบรคเกอร์<br>บริษัทชั้นนำ</p>
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <h3>📞 ช่องทางติดต่อ</h3>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon">💬</div>
+                    <a href="https://lin.ee/e1Vuz3P">Line: @vax7479a</a>
                 </div>
-                <div class="trust-item">
-                    <div class="icon">📋</div>
-                    <p>กรมธรรม์ถูกต้อง<br>ครบถ้วน</p>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <a href="tel:0841615554">084-161-5554</a>
                 </div>
-                <div class="trust-item">
-                    <div class="icon">🔒</div>
-                    <p>ระบบ 724<br>มาตรฐานสูง</p>
+                <div class="contact-item">
+                    <div class="contact-icon">🔗</div>
+                    <a href="https://insure.724.co.th/u/AM00441133">ซื้อที่ 724</a>
                 </div>
             </div>
         </div>
 
-        <div class="contact">
-            <h3>📞 ติดต่อสอบถาม</h3>
-            <p class="contact-info">💬 Line: @vax7479a <a href="https://lin.ee/e1Vuz3P" style="color: #f5576c;">คลิกแอดเลย</a></p>
-            <p class="contact-info">📱 โทร: 084-161-5554</p>
-            <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">ผู้ช่วยให้คำปรึกษา ไม่ใช่เซลล์ขาย ไม่กดดันแน่นอน</p>
-        </div>
-
+        <!-- Footer -->
         <div class="footer">
-            <p>© 2026 Sri Krung Broker Affiliate | ดำเนินการโดยผู้แทนประกันอิสระ</p>
+            <p>© 2026 Sri Krung Broker Affiliate | ดำเนินการโดย นิภาวดี ตั้งเส้ง (ใบอนุญาต 6604014447)</p>
+            <p>ผู้แทนประกันอิสระ ศรีกรุงโบรคเกอร์ | บริการทั่วประเทศ</p>
         </div>
     </div>
 </body>
