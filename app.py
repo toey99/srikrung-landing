@@ -109,6 +109,7 @@ def ask_claude(user_id, user_message):
             "messages": user_histories[user_id]  # ส่งประวัติทั้งหมดไปให้ AI
         }
         
+        print(f"DEBUG: Sending request to Claude API...")
         response = requests.post(
             "https://api.anthropic.com/v1/messages",
             headers=headers,
@@ -116,13 +117,18 @@ def ask_claude(user_id, user_message):
             timeout=30
         )
         
+        print(f"DEBUG: Claude API Status: {response.status_code}")
+        
         if response.status_code == 200:
-            ai_reply = response.json()['content'][0]['text']
+            result = response.json()
+            print(f"DEBUG: Claude Response Keys: {result.keys()}")
+            ai_reply = result['content'][0]['text']
+            print(f"DEBUG: AI Reply: {ai_reply[:100]}...")
             # 4. เอาคำตอบของ AI บันทึกกลับลงไปในประวัติด้วย
             user_histories[user_id].append({"role": "assistant", "content": ai_reply})
             return ai_reply
         else:
-            print(f"API Error: {response.text}")
+            print(f"ERROR: Claude API Error {response.status_code}: {response.text[:200]}")
             # ถ้า API error ให้เอาข้อความ user ล่าสุดออกไปก่อน
             user_histories[user_id].pop()
             return None
