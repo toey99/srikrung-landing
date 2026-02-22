@@ -6,10 +6,16 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-# API Keys
-ANTHROPIC_API_KEY = os.environ.get('ANTHROPIC_API_KEY')
-LINE_CHANNEL_ACCESS_TOKEN = os.environ.get('LINE_CHANNEL_ACCESS_TOKEN')
-BOSS_NOTIFY_URL = os.environ.get('BOSS_NOTIFY_URL')
+# API Keys - Read from environment with fallback check
+ANTHROPIC_API_KEY = os.environ.get('ANTHROPIC_API_KEY', '').strip()
+LINE_CHANNEL_ACCESS_TOKEN = os.environ.get('LINE_CHANNEL_ACCESS_TOKEN', '').strip()
+LINE_CHANNEL_SECRET = os.environ.get('LINE_CHANNEL_SECRET', '').strip()
+BOSS_NOTIFY_URL = os.environ.get('BOSS_NOTIFY_URL', '').strip()
+
+# Debug: Print to logs (will show in Render logs)
+print(f"DEBUG: ANTHROPIC_API_KEY loaded: {bool(ANTHROPIC_API_KEY)} (length: {len(ANTHROPIC_API_KEY)})")
+print(f"DEBUG: LINE_CHANNEL_ACCESS_TOKEN loaded: {bool(LINE_CHANNEL_ACCESS_TOKEN)} (length: {len(LINE_CHANNEL_ACCESS_TOKEN)})")
+print(f"DEBUG: LINE_CHANNEL_SECRET loaded: {bool(LINE_CHANNEL_SECRET)} (length: {len(LINE_CHANNEL_SECRET)})")
 
 # Knowledge Base
 KNOWLEDGE_BASE = {
@@ -30,6 +36,11 @@ KNOWLEDGE_BASE = {
 
 def ask_claude(user_message):
     """ส่งข้อความไปถาม Claude"""
+    # Check if API Key is loaded
+    if not ANTHROPIC_API_KEY:
+        print("ERROR: ANTHROPIC_API_KEY is empty or not loaded!")
+        return None
+    
     try:
         headers = {
             "x-api-key": ANTHROPIC_API_KEY,
