@@ -17,6 +17,9 @@ print(f"DEBUG: ANTHROPIC_API_KEY loaded: {bool(ANTHROPIC_API_KEY)} (length: {len
 print(f"DEBUG: LINE_CHANNEL_ACCESS_TOKEN loaded: {bool(LINE_CHANNEL_ACCESS_TOKEN)} (length: {len(LINE_CHANNEL_ACCESS_TOKEN)})")
 print(f"DEBUG: LINE_CHANNEL_SECRET loaded: {bool(LINE_CHANNEL_SECRET)} (length: {len(LINE_CHANNEL_SECRET)})")
 
+# Chat history storage (in-memory, per user)
+user_histories = {}
+
 # Knowledge Base
 KNOWLEDGE_BASE = {
     "company": {
@@ -34,12 +37,23 @@ KNOWLEDGE_BASE = {
     }
 }
 
-def ask_claude(user_message):
-    """ส่งข้อความไปถาม Claude"""
+def ask_claude(user_id, user_message):
+    """ส่งข้อความไปถาม Claude พร้อมแนบประวัติการคุย"""
     # Check if API Key is loaded
     if not ANTHROPIC_API_KEY:
         print("ERROR: ANTHROPIC_API_KEY is empty or not loaded!")
         return None
+    
+    # 1. ถ้าเป็น user ใหม่ ให้สร้างประวัติว่างๆ ไว้ก่อน
+    if user_id not in user_histories:
+        user_histories[user_id] = []
+    
+    # 2. เอาข้อความใหม่ของ User ใส่เข้าไปในประวัติ
+    user_histories[user_id].append({"role": "user", "content": user_message})
+    
+    # (Optional) ตัดประวัติให้เหลือแค่ 10 ข้อความล่าสุด เพื่อประหยัด Token
+    if len(user_histories[user_id]) > 10:
+        user_histories[user_id] = user_histories[user_id][-10:]
     
     try:
         headers = {
@@ -92,7 +106,7 @@ def ask_claude(user_message):
             "max_tokens": 1500,
             "temperature": 0.8,
             "system": system_prompt,
-            "messages": [{"role": "user", "content": user_message}]
+            "messages": user_histories[user_id]  # ส่งประวัติทั้งหมดไปให้ AI
         }
         
         response = requests.post(
@@ -103,8 +117,14 @@ def ask_claude(user_message):
         )
         
         if response.status_code == 200:
-            return response.json()['content'][0]['text']
+            ai_reply = response.json()['content'][0]['text']
+            # 4. เอาคำตอบของ AI บันทึกกลับลงไปในประวัติด้วย
+            user_histories[user_id].append({"role": "assistant", "content": ai_reply})
+            return ai_reply
         else:
+            print(f"API Error: {response.text}")
+            # ถ้า API error ให้เอาข้อความ user ล่าสุดออกไปก่อน
+            user_histories[user_id].pop()
             return None
             
     except Exception as e:
@@ -172,8 +192,8 @@ def webhook():
                 
                 print(f"Received: {message} from {user_id}")
                 
-                # ถาม Claude
-                ai_response = ask_claude(message)
+                # ถาม Claude พร้อม user_id สำหรับเก็บประวัติ
+                ai_response = ask_claude(user_id, message)
                 
                 if ai_response:
                     # ตอบกลับ
