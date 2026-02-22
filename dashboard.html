@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sri Krung Broker - Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Prompt', sans-serif;
+            background: linear-gradient(135deg, #1e4a8c 0%, #2d5aa0 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .launch-countdown {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: white;
+        }
+        
+        .launch-countdown h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        
+        .countdown-timer {
+            font-size: 2em;
+            font-weight: 600;
+            color: #ffd700;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card h3 {
+            color: #1e4a8c;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card .number {
+            font-size: 2.5em;
+            font-weight: 600;
+            color: #e85a3d;
+        }
+        
+        .stat-card .label {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .progress-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .progress-section h2 {
+            color: #1e4a8c;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .progress-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .progress-item:last-child {
+            border-bottom: none;
+        }
+        
+        .status-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            margin-right: 15px;
+        }
+        
+        .status-done {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-progress {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-pending {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .progress-info {
+            flex: 1;
+        }
+        
+        .progress-info h4 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .progress-info p {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .progress-bar {
+            width: 100px;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #e85a3d, #ff7f50);
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+        
+        .daily-log {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .daily-log h2 {
+            color: #1e4a8c;
+            margin-bottom: 20px;
+        }
+        
+        .log-entry {
+            border-left: 3px solid #1e4a8c;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .log-date {
+            font-weight: 600;
+            color: #1e4a8c;
+            margin-bottom: 10px;
+        }
+        
+        .log-item {
+            padding: 8px 0;
+            color: #555;
+        }
+        
+        .log-item.done::before {
+            content: "✅ ";
+        }
+        
+        .log-item.progress::before {
+            content: "🔄 ";
+        }
+        
+        .log-item.pending::before {
+            content: "⏳ ";
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 30px;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌊 Sri Krung Broker</h1>
+            <p>ระบบติดตามความคืบหน้าโครงการ</p>
+        </header>
+        
+        <div class="launch-countdown">
+            <h2>🚀 วันเปิดตัว: 27 กุมภาพันธ์ 2026 (ศุกร์)</h2>
+            <div class="countdown-timer" id="countdown">กำลังคำนวณ...</div>
+            <p>วันมงคลตาม Bazi - ธาตุน้ำ nourish ธาตุไม้</p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>📊 ความคืบหน้ารวม</h3>
+                <div class="number">85%</div>
+                <div class="label">เสร็จสมบูรณ์</div>
+            </div>
+            <div class="stat-card">
+                <h3>✅ งานที่เสร็จ</h3>
+                <div class="number">12</div>
+                <div class="label">รายการ</div>
+            </div>
+            <div class="stat-card">
+                <h3>🔄 กำลังทำ</h3>
+                <div class="number">2</div>
+                <div class="label">รายการ</div>
+            </div>
+            <div class="stat-card">
+                <h3>💰 ค่าใช้จ่าย</h3>
+                <div class="number">0</div>
+                <div class="label">บาท (Free Tier)</div>
+            </div>
+        </div>
+        
+        <div class="progress-section">
+            <h2>📋 สถานะระบบหลัก</h2>
+            
+            <div class="progress-item">
+                <div class="status-icon status-done">✓</div>
+                <div class="progress-info">
+                    <h4>Landing Page</h4>
+                    <p>7 ส่วนครบถ้วน พร้อมใช้งาน</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+                <span style="color: #28a745; font-weight: 600;">100%</span>
+            </div>
+            
+            <div class="progress-item">
+                <div class="status-icon status-done">✓</div>
+                <div class="progress-info">
+                    <h4>LINE Rich Menu</h4>
+                    <p>3 ปุ่มครบถ้วน @vax7479a</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+                <span style="color: #28a745; font-weight: 600;">100%</span>
+            </div>
+            
+            <div class="progress-item">
+                <div class="status-icon status-progress">~</div>
+                <div class="progress-info">
+                    <h4>AI Chatbot (Claude 3.5)</h4>
+                    <p>อ่าน API Key ได้แล้ว แต่ยังตอบ fallback</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 80%"></div>
+                    </div>
+                </div>
+                <span style="color: #ffc107; font-weight: 600;">80%</span>
+            </div>
+            
+            <div class="progress-item">
+                <div class="status-icon status-pending">○</div>
+                <div class="progress-info">
+                    <h4>Google Ads</h4>
+                    <p>รอเปิดตัว 27 ก.พ. (งบ 200 บาท/วัน)</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <span style="color: #dc3545; font-weight: 600;">0%</span>
+            </div>
+            
+            <div class="progress-item">
+                <div class="status-icon status-pending">○</div>
+                <div class="progress-info">
+                    <h4>Daily Bazi & RSS News</h4>
+                    <p>รอตั้งค่า Task Scheduler</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 20%"></div>
+                    </div>
+                </div>
+                <span style="color: #ffc107; font-weight: 600;">20%</span>
+            </div>
+        </div>
+        
+        <div class="daily-log">
+            <h2>📝 บันทึกรายวัน</h2>
+            
+            <div class="log-entry">
+                <div class="log-date">23 กุมภาพันธ์ 2026</div>
+                <div class="log-item done">สร้าง Landing Page HTML 7 ส่วน</div>
+                <div class="log-item done">Deploy บน GitHub Pages</div>
+                <div class="log-item done">ตั้งค่า LINE Rich Menu 3 ปุ่ม</div>
+                <div class="log-item done">สร้าง AI Chatbot ด้วย Flask</div>
+                <div class="log-item done">Deploy บน Render</div>
+                <div class="log-item done">แก้ไข Environment Variables ให้อ่านได้</div>
+                <div class="log-item done">เพิ่ม Chat History ให้ AI จำบริบทได้</div>
+                <div class="log-item done">เพิ่ม Debug Logging</div>
+                <div class="log-item progress">แก้ไข AI ให้ตอบได้จริง</div>
+            </div>
+            
+            <div class="log-entry">
+                <div class="log-date">22 กุมภาพันธ์ 2026</div>
+                <div class="log-item done">วิเคราะห์ Bazi วันเปิดตัว (27 ก.พ.)</div>
+                <div class="log-item done">สร้าง Knowledge Base สำหรับ AI</div>
+                <div class="log-item done">ออกแบบ Rich Menu</div>
+                <div class="log-item done">ขอ API Key จาก Claude</div>
+                <div class="log-item done">ตั้งค่า Line OA @vax7479a</div>
+            </div>
+            
+            <div class="log-entry">
+                <div class="log-date">21 กุมภาพันธ์ 2026</div>
+                <div class="log-item done">วางแผนโครงสร้างระบบ</div>
+                <div class="log-item done">สร้าง GitHub Repository</div>
+                <div class="log-item done">วิเคราะห์คู่แข่ง</div>
+                <div class="log-item done">กำหนดบุคลิก AI (อวี้เวิน)</div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>📞 ติดต่อ: 084-161-5554 | 💬 LINE: @vax7479a</p>
+            <p>อัพเดทล่าสุด: <span id="lastUpdate"></span></p>
+        </footer>
+    </div>
+    
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const launchDate = new Date('2026-02-27T09:00:00');
+            const now = new Date();
+            const diff = launchDate - now;
+            
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                
+                document.getElementById('countdown').textContent = 
+                    `${days} วัน ${hours} ชั่วโมง ${minutes} นาที`;
+            } else {
+                document.getElementById('countdown').textContent = 'เปิดตัวแล้ว! 🎉';
+            }
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 60000);
+        
+        // Last Update
+        document.getElementById('lastUpdate').textContent = new Date().toLocaleString('th-TH');
+    </script>
+</body>
+</html>
