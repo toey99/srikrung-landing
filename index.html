@@ -103,17 +103,30 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 40px;
+            gap: 30px;
             flex-wrap: wrap;
         }
         .partner-logo {
-            background: var(--bg-light);
-            padding: 15px 25px;
+            background: white;
+            padding: 15px 20px;
             border-radius: 8px;
-            font-weight: 600;
-            color: var(--text-gray);
             border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             min-width: 120px;
+            height: 70px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .partner-logo:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .partner-logo img {
+            max-height: 40px;
+            max-width: 100px;
+            width: auto;
+            object-fit: contain;
         }
         
         /* Why Choose Us Section */
@@ -373,12 +386,24 @@
         <div class="trust-partners">
             <h2><i class="fas fa-handshake"></i> บริษัทประกันภัยชั้นนำที่ร่วมรายการ</h2>
             <div class="partner-logos">
-                <div class="partner-logo">724</div>
-                <div class="partner-logo">วิริยะ</div>
-                <div class="partner-logo">ทิพย์</div>
-                <div class="partner-logo">ไทยวิวัฒน์</div>
-                <div class="partner-logo">อาคเนย์</div>
-                <div class="partner-logo">สินมั่นคง</div>
+                <div class="partner-logo">
+                    <img src="https://insure.724.co.th/assets/images/724-logo.png" alt="724" style="height: 40px; width: auto;" onerror="this.src='https://via.placeholder.com/80x40/1e4a8c/ffffff?text=724'">
+                </div>
+                <div class="partner-logo">
+                    <img src="https://www.viriyah.co.th/images/logo.png" alt="วิริยะประกันภัย" style="height: 40px; width: auto;" onerror="this.src='https://via.placeholder.com/120x40/1e4a8c/ffffff?text=วิริยะ'">
+                </div>
+                <div class="partner-logo">
+                    <img src="https://www.dhipaya.co.th/images/logo.png" alt="ทิพยประกันภัย" style="height: 40px; width: auto;" onerror="this.src='https://via.placeholder.com/120x40/1e4a8c/ffffff?text=ทิพย์'">
+                </div>
+                <div class="partner-logo">
+                    <img src="https://www.thaivivat.co.th/images/logo.png" alt="ไทยวิวัฒน์" style="height: 40px; width: auto;" onerror="this.src='https://via.placeholder.com/120x40/1e4a8c/ffffff?text=ไทยวิวัฒน์'">
+                </div>
+                <div class="partner-logo">
+                    <img src="https://www.akainsurance.co.th/images/logo.png" alt="อาคเนย์" style="height: 40px; width: auto;" onerror="this.src='https://via.placeholder.com/120x40/1e4a8c/ffffff?text=อาคเนย์'">
+                </div>
+                <div class="partner-logo">
+                    <img src="https://www.smg.co.th/images/logo.png" alt="สินมั่นคง" style="height: 40px; width: auto;" onerror="this.src='https://via.placeholder.com/120x40/1e4a8c/ffffff?text=สินมั่นคง'">
+                </div>
             </div>
         </div>
 
