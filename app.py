@@ -102,7 +102,7 @@ def ask_claude(user_id, user_message):
 ให้แนะนำให้ติดต่อคุณนิภาวดีโดยตรงที่เบอร์ 084-161-5554 หรือ @vax7479a"""
 
         data = {
-            "model": "claude-3-5-sonnet-20241022",
+            "model": "claude-3-sonnet-20240229",
             "max_tokens": 1500,
             "temperature": 0.8,
             "system": system_prompt,
