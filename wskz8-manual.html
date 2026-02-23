@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คู่มือการใช้งาน WSKZ8 - wisoodkrub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Sarabun', sans-serif; font-size: 11pt; line-height: 1.6; color: #333; }
+        .page { width: 210mm; min-height: 297mm; padding: 20mm; margin: 0 auto; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); page-break-after: always; }
+        @media print { .page { box-shadow: none; margin: 0; } body { background: white; } }
+        .cover { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 257mm; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; margin: -20mm; padding: 20mm; }
+        .cover-logo { font-size: 24pt; font-weight: 700; margin-bottom: 10px; letter-spacing: 2px; }
+        .cover-model { font-size: 48pt; font-weight: 700; margin: 20px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .cover-subtitle { font-size: 18pt; font-weight: 300; margin-bottom: 30px; }
+        .cover-tagline { font-size: 14pt; font-style: italic; opacity: 0.9; }
+        h1 { font-size: 20pt; color: #667eea; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #667eea; }
+        h2 { font-size: 14pt; color: #764ba2; margin: 20px 0 10px 0; }
+        .highlight-box { background: #f0f4ff; border-left: 4px solid #667eea; padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0; }
+        .warning-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0; }
+        .tip-box { background: #d4edda; border-left: 4px solid #28a745; padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0; }
+        .placeholder { background: #fff3cd; border: 2px dashed #ffc107; padding: 15px; margin: 10px 0; border-radius: 8px; color: #856404; font-style: italic; }
+        .step-list { counter-reset: step; list-style: none; margin: 15px 0; }
+        .step-list li { counter-increment: step; margin-bottom: 10px; padding-left: 35px; position: relative; }
+        .step-list li::before { content: counter(step); position: absolute; left: 0; background: #667eea; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10pt; font-weight: 600; }
+        .bullet-list { margin: 10px 0 10px 20px; }
+        .bullet-list li { margin-bottom: 5px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 10pt; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background: #667eea; color: white; font-weight: 600; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 20px 0; }
+        .feature-card { background: #f8f9fa; padding: 15px; border-radius: 8px; border: 1px solid #e9ecef; }
+        .feature-card h4 { color: #667eea; margin-bottom: 8px; font-size: 11pt; }
+        .feature-card p { font-size: 10pt; margin: 0; }
+    </style>
+</head>
+<body>
+    <!-- Cover Page -->
+    <div class="page">
+        <div class="cover">
+            <div class="cover-logo">wisoodkrub</div>
+            <div class="cover-model">WSKZ8</div>
+            <div class="cover-subtitle">เครื่องแปลภาษาอัจฉริยะ</div>
+            <div style="font-size:12pt; margin:20px 0; opacity:0.8;">[ใส่รูปสินค้าตรงนี้]</div>
+            <div class="cover-tagline">"สื่อสารไร้พรมแดน พูดได้ทุกภาษา"</div>
+            <div style="margin-top:50px; font-size:10pt; opacity:0.7;">คู่มือการใช้งานฉบับที่ 1.0 | กุมภาพันธ์ 2026</div>
+        </div>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="page">
+        <h1>📋 สารบัญ</h1>
+        <table>
+            <tr><td><strong>1.</strong> รู้จักกับ WSKZ8</td><td>3</td></tr>
+            <tr><td><strong>2.</strong> อุปกรณ์ในกล่อง</td><td>3</td></tr>
+            <tr><td><strong>3.</strong> เริ่มต้นใช้งาน</td><td>4</td></tr>
+            <tr><td><strong>4.</strong> การชาร์จแบตเตอรี่</td><td>4</td></tr>
+            <tr><td><strong>5.</strong> วิธีการใช้งานพื้นฐาน</td><td>5</td></tr>
+            <tr><td><strong>6.</strong> ฟีเจอร์หลัก</td><td>6</td></tr>
+            <tr><td><strong>7.</strong> การเชื่อมต่อ WiFi/Bluetooth</td><td>7</td></tr>
+            <tr><td><strong>8.</strong> การอัพเดทซอฟต์แวร์</td><td>8</td></tr>
+            <tr><td><strong>9.</strong> การดูแลรักษา</td><td>8</td></tr>
+            <tr><td><strong>10.</strong> แก้ไขปัญหาเบื้องต้น</td><td>9</td></tr>
+            <tr><td><strong>11.</strong> ข้อมูลท_technical_</td><td>10</td></tr>
+            <tr><td><strong>12.</strong> การติดต่อสอบถาม</td><td>10</td></tr>
+        </table>
+    </div>
+
+    <!-- Introduction -->
+    <div class="page">
+        <h1>👋 1. รู้จักกับ WSKZ8</h1>
+        <p>ขอบคุณที่เลือกใช้ <strong>WSKZ8</strong> เครื่องแปลภาษาอัจฉริยะจาก wisoodkrub ออกแบบมาเพื่อให้การสื่อสารข้ามภาษาเป็นเรื่องง่าย</p>
+        
+        <div class="highlight-box">
+            <strong>✨ จุดเด่น:</strong>
+            <ul class="bullet-list">
+                <li>แปลภาษา Real-time [จำนวน] ภาษา</li>
+                <li>ระบบ AI แม่นยำสูง</li>
+                <li>ใช้งานง่าย พกพาสะดวก</li>
+                <li>แบตเตอรี่ [จำนวน] ชั่วโมง</li>
+            </ul>
+        </div>
+
+        <h1>📦 2. อุปกรณ์ในกล่อง</h1>
+        <div class="placeholder">[บอสช่วยเติม: มีอะไรในกล่องบ้าง?]</div>
+        <table>
+            <tr><th>รายการ</th><th>จำนวน</th></tr>
+            <tr><td>ตัวเครื่อง WSKZ8</td><td>1 เครื่อง</td></tr>
+            <tr><td>สายชาร์จ USB</td><td>1 เส้น</td></tr>
+            <tr><td>อะแดปเตอร์ชาร์จ</td><td>1 ชิ้น</td></tr>
+            <tr><td>คู่มือการใช้งาน</td><td>1 เล่ม</td></tr>
+            <tr><td>ซองใส่</td><td>1 ชิ้น</td></tr>
+        </table>
+    </div>
+
+    <!-- Getting Started -->
+    <div class="page">
+        <h1>🚀 3. เริ่มต้นใช้งาน</h1>
+        <ol class="step-list">
+            <li>ชาร์จแบตเตอรี่จนเต็ม</li>
+            <li>กดปุ่มเปิดเครื่องค้าง [จำนวน] วินาที</li>
+            <li>รอจอแสดงผลติด</li>
+            <li>เลือกภาษา</li>
+            <li>เชื่อมต่อ WiFi</li>
+            <li>เริ่มใช้งาน!</li>
+        </ol>
+        <div class="placeholder">[บอสช่วยเติม: ปุ่มเปิดอยู่ตรงไหน? หน้าจอเป็นยังไง?]</div>
+
+        <h1>🔋 4. การชาร์จแบตเตอรี่</h1>
+        <div class="highlight-box">
+            <strong>วิธีชาร์จ:</strong>
+            <ol class="step-list">
+                <li>เสียบสายชาร์จเข้าช่อง [ระบุ]</li>
+                <li>เสียบอีกด้านเข้าอะแดปเตอร์</li>
+                <li>รอไฟ [สี] ขึ้น</li>
+                <li>ชาร์จ [จำนวน] ชั่วโมง</li>
+            </ol>
+        </div>
+        <div class="tip-box">💡 ชาร์จครั้งแรกควรเต็ม 100%</div>
+    </div>
+
+    <!-- Basic Usage -->
+    <div class="page">
+        <h1>🗣️ 5. วิธีการใช้งานพื้นฐาน</h1>
+        <div class="feature-grid">
+            <div class="feature-card"><h4>🎤 โหมดพูด</h4><p>พูดเข้าไมค์ เครื่องแปลทันที</p></div>
+            <div class="feature-card"><h4>⌨️ โหมดพิมพ์</h4><p>พิมพ์ข้อความผ่านหน้าจอ</p></div>
+            <div class="feature-card"><h4>📷 โหมดกล้อง</h4><p>ถ่ายรูปแปลป้าย แผนที่</p></div>
+            <div class="feature-card"><h4>👥 โหมดกลุ่ม</h4><p>สนทนาหลายคนพร้อมกัน</p></div>
+        </div>
+        <div class="placeholder">[บอสช่วยเติม: วิธีใช้แต่ละโหมดละเอียดยังไง?]</div>
+    </div>
+
+    <!-- Features -->
+    <div class="page">
+        <h1>⭐ 6. ฟีเจอร์หลัก</h1>
+        <h2>ภาษาที่รองรับ</h2>
+        <div class="placeholder">[บอสช่วยเติม: รองรับกี่ภาษา? มีภาษาอะไรบ้าง?]</div>
+        <table>
+            <tr><th>ภาคพื้น</th><th>ภาษา</th></tr>
+            <tr><td>เอเชีย</td><td>ไทย, อังกฤษ, จีน, ญี่ปุ่น, เกาหลี...</td></tr>
+            <tr><td>ยุโรป</td><td>เยอรมัน, ฝรั่งเศส, สเปน...</td></tr>
+        </table>
+    </div>
+
+    <!-- Connectivity -->
+    <div class="page">
+        <h1>📡 7. การเชื่อมต่อ WiFi/Bluetooth</h1>
+        <h2>เชื่อมต่อ WiFi</h2>
+        <ol class="step-list">
+            <li>เปิดเครื่อง WSKZ8</li>
+            <li>เข้าเมนู "การตั้งค่า" → "WiFi"</li>
+            <li>เลือกชื่อเครือข่าย</li>
+            <li>ใส่รหัสผ่าน</li>
+            <li>กด "เชื่อมต่อ"</li>
+        </ol>
+        <div class="placeholder">[บอสช่วยเติม: Bluetooth เชื่อมกับอะไรได้บ้าง?]</div>
+    </div>
+
+    <!-- Update & Maintenance -->
+    <div class="page">
+        <h1>🔄 8. การอัพเดทซอฟต์แวร์</h1>
+        <ol class="step-list">
+            <li>เชื่อมต่อ WiFi</li>
+            <li>เข้าเมนู "การตั้งค่า" → "อัพเดท"</li>
+            <li>กด "ตรวจสอบ"</li>
+            <li>ดาวน์โหลดและติดตั้ง</li>
+        </ol>
+        <div class="warning-box">⚠️ อย่าปิดเครื่องระหว่างอัพเดท</div>
+
+        <h1>🧹 9. การดูแลรักษา</h1>
+        <ul class="bullet-list">
+            <li>เช็ดด้วยผ้าไมโครไฟเบอร์แห้ง</li>
+            <li>หลีกเลี่ยงน้ำและความชื้น</li>
+            <li>เก็บในที่อุณหภูมิห้อง</li>
+            <li>ชาร์จก่อนแบตหมด</li>
+        </ul>
+    </div>
+
+    <!-- Troubleshooting -->
+    <div class="page">
+        <h1>🔧 10. แก้ไขปัญหาเบื้องต้น</h1>
+        <table>
+            <tr><th>อาการ</th><th>สาเหตุ</th><th>วิธีแก้</th></tr>
+            <tr><td>เปิดไม่ติด</td><td>แบตหมด</td><td>ชาร์จ 30 นาที</td></tr>
+            <tr><td>แปลไม่ออก</td><td>ไม่มีเน็ต</td><td>เชื่อมต่อ WiFi</td></tr>
+            <tr><td>เสียงไม่ออก</td><td>ลำโพงเงียบ</td><td>เพิ่มเสียง</td></tr>
+        </table>
+        <div class="placeholder">[บอสช่วยเติม: มีปัญหาอื่นอีกไหม?]</div>
+    </div>
+
+    <!-- Specs & Contact -->
+    <div class="page">
+        <h1>📊 11. ข้อมูลท_technical_</h1>
+        <div class="placeholder">[บอสช่วยเติม: แบตเท่าไร? น้ำหนัก? ขนาด? หน้าจอ?]</div>
+        <table>
+            <tr><td><strong>รุ่น</strong></td><td>WSKZ8</td></tr>
+            <tr><td><strong>แบตเตอรี่</strong></td><td>[เติม] mAh</td></tr>
+            <tr><td><strong>การใช้งาน</strong></td><td>[เติม] ชั่วโมง</td></tr>
+            <tr><td><strong>หน้าจอ</strong></td><td>[เติม] นิ้ว</td></tr>
+            <tr><td><strong>น้ำหนัก</strong></td><td>[เติม] กรัม</td></tr>
+            <tr><td><strong>การเชื่อมต่อ</strong></td><td>WiFi, Bluetooth</td></tr>
+        </table>
+
+        <h1>📞 12. การติดต่อสอบถาม</h1>
+        <div class="highlight-box">
+            <strong>wisoodkrub</strong><br>
+            📱 LINE: @wisoodkrub<br>
+            📧 Email: [เติม]<br>
+            🌐 Website: [เติม]<br><br>
+            <em>รับประกัน 1 ปี</em>
+        </div>
+    </div>
+</body>
+</html>
