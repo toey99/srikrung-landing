@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ซื้อประกันรถยนต์ออนไลน์ ราคาพิเศษ | ไม่ผ่านเซลล์ | Sri Krung 724</title>
     <meta name="description" content="ซื้อประกันรถยนต์ออนไลน์ราคาพิเศษผ่าน Sri Krung 724 ซื้อเองได้ ไม่โดนกดดัน มีผู้ช่วยให้คำปรึกษาผ่านไลน์ 24/7">
+    
+    <!-- Google Analytics 4 (GA4) - Conversion Tracking -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -378,8 +388,8 @@
             <h1>ซื้อประกันรถยนต์ออนไลน์ <span class="highlight">ราคาพิเศษ</span><br>ไม่ผ่านเซลล์ ไม่โดนกดดัน</h1>
             <p class="subheadline">ผ่านระบบ 724 ของศรีกรุงโบรคเกอร์ ซื้อเองได้ทันที<br>มีผู้ช่วยให้คำปรึกษาผ่านไลน์ 24/7</p>
             <div class="cta-buttons">
-                <a href="https://insure.724.co.th/u/AM00441133" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> ซื้อประกันเลย</a>
-                <a href="https://lin.ee/e1Vuz3P" class="btn btn-secondary"><i class="fab fa-line"></i> ปรึกษาฟรีทางไลน์</a>
+                <a href="https://insure.724.co.th/u/AM00441133" id="btn-buy-724" class="btn btn-primary" onclick="trackConversion('purchase_intent')"><i class="fas fa-shopping-cart"></i> ซื้อประกันเลย</a>
+                <a href="https://lin.ee/e1Vuz3P" id="btn-add-line" class="btn btn-secondary" onclick="trackConversion('generate_lead')"><i class="fab fa-line"></i> ปรึกษาฟรีทางไลน์</a>
             </div>
         </div>
 
@@ -600,8 +610,8 @@
             <h2><i class="fas fa-bullseye"></i> พร้อมซื้อประกันรถยนต์ราคาพิเศษ?</h2>
             <p>ซื้อเองได้ง่ายๆ ผ่านระบบ 724 หรือปรึกษาเราฟรีก่อนตัดสินใจ</p>
             <div class="cta-buttons">
-                <a href="https://insure.724.co.th/u/AM00441133" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> ไปซื้อที่ 724 เลย</a>
-                <a href="https://lin.ee/e1Vuz3P" class="btn btn-secondary"><i class="fab fa-line"></i> แอดไลน์ปรึกษาก่อน</a>
+                <a href="https://insure.724.co.th/u/AM00441133" id="btn-buy-724-bottom" class="btn btn-primary" onclick="trackConversion('purchase_intent')"><i class="fas fa-shopping-cart"></i> ไปซื้อที่ 724 เลย</a>
+                <a href="https://lin.ee/e1Vuz3P" id="btn-add-line-bottom" class="btn btn-secondary" onclick="trackConversion('generate_lead')"><i class="fab fa-line"></i> แอดไลน์ปรึกษาก่อน</a>
             </div>
         </div>
 
@@ -630,5 +640,54 @@
             <p>ผู้แทนประกันอิสระ ศรีกรุงโบรคเกอร์ | บริการทั่วประเทศ</p>
         </div>
     </div>
+
+    <!-- Conversion Tracking Script -->
+    <script>
+        // Track conversions for Google Ads
+        function trackConversion(eventName) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', eventName, {
+                    'event_category': 'engagement',
+                    'send_to': 'GA_MEASUREMENT_ID'
+                });
+                console.log('Tracked:', eventName);
+            }
+        }
+
+        // Additional tracking for button clicks
+        document.addEventListener('DOMContentLoaded', function() {
+            // Track Buy 724 button (Hero)
+            var btnBuy724 = document.getElementById('btn-buy-724');
+            if (btnBuy724) {
+                btnBuy724.addEventListener('click', function() {
+                    trackConversion('purchase_intent');
+                });
+            }
+
+            // Track Add LINE button (Hero)
+            var btnAddLine = document.getElementById('btn-add-line');
+            if (btnAddLine) {
+                btnAddLine.addEventListener('click', function() {
+                    trackConversion('generate_lead');
+                });
+            }
+
+            // Track Buy 724 button (Bottom)
+            var btnBuy724Bottom = document.getElementById('btn-buy-724-bottom');
+            if (btnBuy724Bottom) {
+                btnBuy724Bottom.addEventListener('click', function() {
+                    trackConversion('purchase_intent');
+                });
+            }
+
+            // Track Add LINE button (Bottom)
+            var btnAddLineBottom = document.getElementById('btn-add-line-bottom');
+            if (btnAddLineBottom) {
+                btnAddLineBottom.addEventListener('click', function() {
+                    trackConversion('generate_lead');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
