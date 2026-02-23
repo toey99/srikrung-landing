@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat History Dashboard - Sri Krung Broker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Prompt', sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e4a8c 0%, #2d5aa0 100%);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            font-size: 1.8em;
+            font-weight: 500;
+        }
+        
+        .stats-bar {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+        
+        .stat-label {
+            font-size: 0.8em;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+        }
+        
+        .sidebar {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            height: fit-content;
+        }
+        
+        .sidebar h3 {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #1e4a8c;
+        }
+        
+        .user-list {
+            list-style: none;
+        }
+        
+        .user-item {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+        
+        .user-item:hover {
+            background: #f5f7fa;
+        }
+        
+        .user-item.active {
+            background: #e3f2fd;
+            border-left-color: #1e4a8c;
+        }
+        
+        .user-item.handoff {
+            background: #fff3e0;
+            border-left-color: #e65100;
+        }
+        
+        .user-name {
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+        
+        .user-meta {
+            font-size: 0.8em;
+            color: #888;
+            margin-top: 4px;
+        }
+        
+        .handoff-badge {
+            display: inline-block;
+            background: #e65100;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7em;
+            margin-left: 8px;
+        }
+        
+        .chat-area {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            height: 70vh;
+        }
+        
+        .chat-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-header h3 {
+            color: #1e4a8c;
+        }
+        
+        .chat-actions button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Prompt', sans-serif;
+            transition: all 0.2s;
+        }
+        
+        .btn-handoff {
+            background: #e65100;
+            color: white;
+        }
+        
+        .btn-handoff:hover {
+            background: #d84315;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            max-width: 80%;
+        }
+        
+        .message-user {
+            margin-left: auto;
+            text-align: right;
+        }
+        
+        .message-bot {
+            margin-right: auto;
+        }
+        
+        .message-bubble {
+            padding: 12px 16px;
+            border-radius: 12px;
+            display: inline-block;
+            text-align: left;
+        }
+        
+        .message-user .message-bubble {
+            background: #1e4a8c;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .message-bot .message-bubble {
+            background: #f0f2f5;
+            color: #333;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .message-time {
+            font-size: 0.75em;
+            color: #888;
+            margin-top: 4px;
+        }
+        
+        .notification-bar {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            padding: 15px 20px;
+            max-width: 350px;
+            display: none;
+        }
+        
+        .notification-bar.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .notification-title {
+            font-weight: 600;
+            color: #e65100;
+        }
+        
+        .notification-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            color: #888;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #888;
+        }
+        
+        .empty-state i {
+            font-size: 4em;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                max-height: 200px;
+                overflow-y: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div>
+                <h1><i class="fas fa-comments"></i> Chat History Dashboard</h1>
+                <p>ดูประวัติการสนทนาลูกค้ากับ AI</p>
+            </div>
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-value" id="total-users">-</div>
+                    <div class="stat-label">ผู้ใช้</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="total-messages">-</div>
+                    <div class="stat-label">ข้อความ</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="handoff-count">-</div>
+                    <div class="stat-label">รอตอบ</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Sidebar - User List -->
+        <div class="sidebar">
+            <h3><i class="fas fa-users"></i> รายชื่อลูกค้า</h3>
+            <ul class="user-list" id="user-list">
+                <li class="loading">กำลังโหลด...</li>
+            </ul>
+        </div>
+
+        <!-- Chat Area -->
+        <div class="chat-area">
+            <div class="chat-header">
+                <h3 id="chat-user-name"><i class="fas fa-user"></i> เลือกลูกค้าเพื่อดูประวัติ</h3>
+                <div class="chat-actions" id="chat-actions" style="display: none;">
+                    <button class="btn-handoff" onclick="markAsResolved()">
+                        <i class="fas fa-check"></i> ตอบเสร็จแล้ว
+                    </button>
+                </div>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="empty-state">
+                    <i class="fas fa-comment-dots"></i>
+                    <p>เลือกลูกค้าจากรายชื่อด้านซ้ายเพื่อดูประวัติการสนทนา</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Bar -->
+    <div class="notification-bar" id="notification">
+        <div class="notification-header">
+            <span class="notification-title"><i class="fas fa-bell"></i> แจ้งเตือน</span>
+            <button class="notification-close" onclick="hideNotification()">&times;</button>
+        </div>
+        <div id="notification-content">มีลูกค้าขอติดต่อแอดมิน</div>
+    </div>
+
+    <script>
+        // Mock data for demonstration
+        let users = [];
+        let currentUser = null;
+
+        // Load users
+        async function loadUsers() {
+            try {
+                // In real implementation, fetch from API
+                // const response = await fetch('/api/users');
+                // users = await response.json();
+                
+                // Mock data
+                users = [
+                    {
+                        user_id: "U1234567890",
+                        display_name: "คุณสมชาย",
+                        last_active: "2026-02-23 22:30:00",
+                        status: "handoff",
+                        total_messages: 5,
+                        unread: true
+                    },
+                    {
+                        user_id: "U0987654321",
+                        display_name: "คุณสมหญิง",
+                        last_active: "2026-02-23 22:15:00",
+                        status: "active",
+                        total_messages: 3,
+                        unread: false
+                    }
+                ];
+                
+                renderUserList();
+                updateStats();
+            } catch (error) {
+                console.error('Error loading users:', error);
+            }
+        }
+
+        // Render user list
+        function renderUserList() {
+            const userList = document.getElementById('user-list');
+            
+            if (users.length === 0) {
+                userList.innerHTML = '<li class="empty-state">ไม่มีข้อมูล</li>';
+                return;
+            }
+            
+            userList.innerHTML = users.map(user => `
+                <li class="user-item ${user.status === 'handoff' ? 'handoff' : ''} ${user.unread ? 'unread' : ''} ${currentUser === user.user_id ? 'active' : ''}" 
+                    onclick="selectUser('${user.user_id}')">
+                    <div class="user-name">
+                        ${user.display_name || user.user_id.substring(0, 10)}
+                        ${user.status === 'handoff' ? '<span class="handoff-badge">รอตอบ</span>' : ''}
+                    </div>
+                    <div class="user-meta">
+                        ${user.total_messages} ข้อความ · ${formatTime(user.last_active)}
+                    </div>
+                </li>
+            `).join('');
+        }
+
+        // Select user
+        async function selectUser(userId) {
+            currentUser = userId;
+            const user = users.find(u => u.user_id === userId);
+            
+            document.getElementById('chat-user-name').innerHTML = `
+                <i class="fas fa-user"></i> ${user.display_name || userId}
+                ${user.status === 'handoff' ? '<span style="color: #e65100; font-size: 0.8em;">(รอการตอบกลับ)</span>' : ''}
+            `;
+            
+            document.getElementById('chat-actions').style.display = 
+                user.status === 'handoff' ? 'block' : 'none';
+            
+            renderUserList();
+            await loadChatHistory(userId);
+        }
+
+        // Load chat history
+        async function loadChatHistory(userId) {
+            const chatMessages = document.getElementById('chat-messages');
+            chatMessages.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i> กำลังโหลด...</div>';
+            
+            try {
+                // In real implementation, fetch from API
+                // const response = await fetch(`/api/chat/${userId}`);
+                // const messages = await response.json();
+                
+                // Mock messages
+                const messages = [
+                    {
+                        type: 'user',
+                        message: 'สวัสดีค่ะ อยากสอบถามประกันรถยนต์ค่ะ',
+                        timestamp: '2026-02-23 22:25:00'
+                    },
+                    {
+                        type: 'bot',
+                        message: 'สวัสดีค่ะ! ยินดีต้อนรับค่ะ 😊\n\nหนูสามารถช่วยตอบคำถามเกี่ยวกับประกันรถยนต์ได้ค่ะ สนใจประกันชั้นไหนคะ?',
+                        timestamp: '2026-02-23 22:25:05'
+                    },
+                    {
+                        type: 'user',
+                        message: '3',
+                        timestamp: '2026-02-23 22:30:00'
+                    },
+                    {
+                        type: 'bot',
+                        message: 'หนูได้แจ้งเตือนไปยังพี่แอดมินเรียบร้อยแล้วค่ะ รบกวนรอสักครู่นะคะ เดี๋ยวพี่แอดมินผู้เชี่ยวชาญจะรีบมาดูแลต่อให้ทันทีเลยค่ะ 😊',
+                        timestamp: '2026-02-23 22:30:02',
+                        is_handoff: true
+                    }
+                ];
+                
+                chatMessages.innerHTML = messages.map(msg => `
+                    <div class="message message-${msg.type}">
+                        <div class="message-bubble">
+                            ${msg.message.replace(/\n/g, '<br>')}
+                        </div>
+                        <div class="message-time">
+                            ${formatTime(msg.timestamp)}
+                            ${msg.is_handoff ? '<span style="color: #e65100;">· ส่งต่อแอดมิน</span>' : ''}
+                        </div>
+                    </div>
+                `).join('');
+                
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            } catch (error) {
+                console.error('Error loading chat history:', error);
+                chatMessages.innerHTML = '<div class="empty-state">ไม่สามารถโหลดข้อความได้</div>';
+            }
+        }
+
+        // Mark as resolved
+        function markAsResolved() {
+            if (!currentUser) return;
+            
+            const user = users.find(u => u.user_id === currentUser);
+            if (user) {
+                user.status = 'active';
+                renderUserList();
+                document.getElementById('chat-actions').style.display = 'none';
+                alert('ทำเครื่องหมายว่าตอบเสร็จแล้ว');
+            }
+        }
+
+        // Update stats
+        function updateStats() {
+            document.getElementById('total-users').textContent = users.length;
+            document.getElementById('total-messages').textContent = 
+                users.reduce((sum, u) => sum + u.total_messages, 0);
+            document.getElementById('handoff-count').textContent = 
+                users.filter(u => u.status === 'handoff').length;
+        }
+
+        // Format time
+        function formatTime(timestamp) {
+            const date = new Date(timestamp);
+            return date.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        // Show notification
+        function showNotification(message) {
+            document.getElementById('notification-content').textContent = message;
+            document.getElementById('notification').classList.add('show');
+        }
+
+        // Hide notification
+        function hideNotification() {
+            document.getElementById('notification').classList.remove('show');
+        }
+
+        // Check for new notifications
+        function checkNotifications() {
+            const handoffUsers = users.filter(u => u.status === 'handoff' && u.unread);
+            if (handoffUsers.length > 0) {
+                showNotification(`มี ${handoffUsers.length} คนขอติดต่อแอดมิน`);
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadUsers();
+            setInterval(checkNotifications, 30000); // Check every 30 seconds
+        });
+    </script>
+</body>
+</html>

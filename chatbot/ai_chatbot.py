@@ -7,11 +7,13 @@ import json
 import requests
 from datetime import datetime
 from typing import Dict, Any, Optional
+from .database import get_db
 
 class SriKrungChatbot:
     """
     AI Chatbot สำหรับตอบลูกค้าประกันรถยนต์
     ใช้ Claude 3.5 Sonnet API
+    พร้อมระบบบันทึกประวัติและแจ้งเตือนบอส
     """
     
     def __init__(self):
@@ -19,12 +21,19 @@ class SriKrungChatbot:
         self.line_channel_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN')
         self.line_channel_secret = os.getenv('LINE_CHANNEL_SECRET')
         self.boss_notify_url = os.getenv('BOSS_NOTIFY_URL')  # Discord Webhook หรือ LINE Notify
+        self.boss_line_id = os.getenv('BOSS_LINE_ID')  # LINE ID ของบอสสำหรับแจ้งเตือน
+        
+        # Database
+        self.db = get_db()
         
         # Knowledge Base ประกันภัย
         self.knowledge_base = self._load_knowledge_base()
         
-        # ประวัติการสนทนา (เก็บชั่วคราว)
+        # ประวัติการสนทนา (เก็บชั่วคราวใน memory)
         self.conversation_history = {}
+        
+        # Users in handoff mode
+        self.handoff_users = set()
     
     def _load_knowledge_base(self) -> Dict:
         """โหลดข้อมูลความรู้เรื่องประกัน"""
@@ -385,6 +394,147 @@ class SriKrungChatbot:
             result['response'] = "ขออภัยค่ะ ระบบชั่วคราว กรุณาติดต่อเจ้าหน้าที่โดยตรง 084-161-5554 หรือ @vax7479a 🙏"
         
         return result
+
+    def check_handoff_request(self, user_id: str, user_message: str) -> bool:
+        """
+        ตรวจสอบว่าลูกค้าต้องการติดต่อแอดมินหรือไม่
+        """
+        handoff_keywords = [
+            "3", "ติดต่อแอดมิน", "ติดต่อเจ้าหน้าที่", "คุยกับคน",
+            "ขอคุยกับคน", "พูดคุยกับเจ้าหน้าที่", "ติดต่อพนักงาน",
+            "ขอติดต่อ", "ติดต่อบอส", "ติดต่อคุณนิภาวดี"
+        ]
+        
+        message_lower = user_message.lower().strip()
+        
+        for keyword in handoff_keywords:
+            if keyword in message_lower:
+                return True
+        
+        return False
+    
+    def enable_handoff_mode(self, user_id: str, reason: str = "User requested"):
+        """
+        เปิดโหมด Human Handoff สำหรับ user
+        """
+        self.handoff_users.add(user_id)
+        self.db.request_handoff(user_id, reason)
+        
+        # แจ้งเตือนบอส
+        self._send_handoff_notification(user_id, reason)
+    
+    def disable_handoff_mode(self, user_id: str):
+        """
+        ปิดโหมด Human Handoff
+        """
+        if user_id in self.handoff_users:
+            self.handoff_users.remove(user_id)
+    
+    def is_in_handoff_mode(self, user_id: str) -> bool:
+        """
+        ตรวจสอบว่า user อยู่ในโหมด handoff หรือไม่
+        """
+        return user_id in self.handoff_users
+    
+    def _send_handoff_notification(self, user_id: str, reason: str):
+        """
+        ส่งแจ้งเตือนให้บอสเมื่อมีคนขอติดต่อแอดมิน
+        """
+        notification_msg = f"""🔔 ลูกค้าขอติดต่อแอดมิน
+
+👤 User ID: {user_id}
+📌 เหตุผล: {reason}
+⏰ เวลา: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+
+👉 เข้าไปตอบได้ที่: Dashboard Chat History
+หรือตอบกลับผ่าน LINE @vax7479a"""
+        
+        # บันทึกลง database
+        self.db.create_notification(user_id, "handoff", notification_msg)
+        
+        # ส่งแจ้งเตือนไป Discord/LINE
+        if self.boss_notify_url:
+            try:
+                requests.post(
+                    self.boss_notify_url,
+                    json={"content": notification_msg},
+                    timeout=10
+                )
+            except:
+                pass
+    
+    def process_message(self, user_id: str, user_name: str, user_message: str) -> str:
+        """
+        ประมวลผลข้อความจาก LINE แบบครบวงจร
+        คืนค่าคำตอบที่จะส่งกลับไปหาลูกค้า
+        """
+        # ตรวจสอบว่าลูกค้าต้องการติดต่อแอดมินหรือไม่
+        if self.check_handoff_request(user_id, user_message):
+            self.enable_handoff_mode(user_id, "User pressed menu 3 or requested human")
+            
+            handoff_response = "หนูได้แจ้งเตือนไปยังพี่แอดมินเรียบร้อยแล้วค่ะ รบกวนรอสักครู่นะคะ เดี๋ยวพี่แอดมินผู้เชี่ยวชาญจะรีบมาดูแลต่อให้ทันทีเลยค่ะ 😊"
+            
+            # บันทึกลง database
+            self.db.save_message(
+                user_id=user_id,
+                user_name=user_name,
+                message=user_message,
+                response=handoff_response,
+                intent="human_handoff",
+                handoff_requested=True,
+                handoff_reason="User requested",
+                ai_handled=False
+            )
+            
+            return handoff_response
+        
+        # ถ้าอยู่ในโหมด handoff แล้ว ไม่ตอบอะไร (รอแอดมินตอบ)
+        if self.is_in_handoff_mode(user_id):
+            # ยังคงบันทึกข้อความ แต่ไม่ตอบ
+            self.db.save_message(
+                user_id=user_id,
+                user_name=user_name,
+                message=user_message,
+                response=None,
+                intent="handoff_continue",
+                handoff_requested=False,
+                ai_handled=False
+            )
+            return None  # ไม่ส่งอะไรกลับ
+        
+        # ประมวลผลปกติด้วย AI
+        result = self.handle_message(user_id, user_message)
+        
+        # บันทึกลง database
+        self.db.save_message(
+            user_id=user_id,
+            user_name=user_name,
+            message=user_message,
+            response=result['response'],
+            intent="auto_response",
+            handoff_requested=result.get('needs_human', False),
+            ai_handled=True
+        )
+        
+        return result['response']
+    
+    def get_user_chat_history(self, user_id: str) -> list:
+        """
+        ดึงประวัติแชทของ user จาก database
+        """
+        return self.db.get_chat_history(user_id)
+    
+    def get_all_active_chats(self) -> list:
+        """
+        ดึงรายการแชทที่กำลัง active
+        """
+        return self.db.get_active_sessions()
+    
+    def get_stats(self) -> dict:
+        """
+        ดึงสถิติการใช้งาน
+        """
+        return self.db.get_stats()
 
 
 # ตัวอย่างการใช้งาน
