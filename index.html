@@ -10,6 +10,15 @@
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KK657RS2');</script>
     <!-- End Google Tag Manager -->
     
+    <!-- Google tag (gtag.js) for Google Ads Conversion Tracking -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-1000176005"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-1000176005');
+    </script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -639,16 +648,15 @@
         </div>
     </div>
 
-    <!-- Conversion Tracking Script -->
+    <!-- Conversion Tracking Script for Google Ads -->
     <script>
-        // Track conversions for Google Ads
+        // Track conversions for Google Ads (AW-1000176005)
         function trackConversion(eventName) {
             if (typeof gtag !== 'undefined') {
-                gtag('event', eventName, {
-                    'event_category': 'engagement',
-                    'send_to': 'GA_MEASUREMENT_ID'
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-1000176005/' + eventName
                 });
-                console.log('Tracked:', eventName);
+                console.log('Google Ads Tracked:', eventName);
             }
         }
 
