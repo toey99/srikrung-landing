@@ -3,346 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>คู่มือการใช้งาน WSKZ8 - wisoodkrub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>WSKZ8 Quick Guide - wisoodkrub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Sarabun', sans-serif; font-size: 11pt; line-height: 1.6; color: #333; }
-        .page { width: 210mm; min-height: 297mm; padding: 20mm; margin: 0 auto; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); page-break-after: always; }
+        body { font-family: 'Sarabun', sans-serif; font-size: 9.5pt; line-height: 1.4; color: #333; }
+        .page { width: 210mm; height: 297mm; padding: 15mm; margin: 0 auto; background: white; box-shadow: 0 0 5px rgba(0,0,0,0.1); page-break-after: always; position: relative; overflow: hidden; }
         @media print { .page { box-shadow: none; margin: 0; } body { background: white; } }
-        .cover { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 257mm; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; margin: -20mm; padding: 20mm; }
-        .cover-logo { font-size: 24pt; font-weight: 700; margin-bottom: 10px; letter-spacing: 2px; }
-        .cover-model { font-size: 48pt; font-weight: 700; margin: 20px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-        .cover-subtitle { font-size: 18pt; font-weight: 300; margin-bottom: 30px; }
-        .cover-tagline { font-size: 14pt; font-style: italic; opacity: 0.9; }
-        h1 { font-size: 20pt; color: #667eea; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #667eea; }
-        h2 { font-size: 14pt; color: #764ba2; margin: 20px 0 10px 0; }
-        .highlight-box { background: #f0f4ff; border-left: 4px solid #667eea; padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0; }
-        .warning-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0; }
-        .tip-box { background: #d4edda; border-left: 4px solid #28a745; padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0; }
-        .placeholder { background: #fff3cd; border: 2px dashed #ffc107; padding: 15px; margin: 10px 0; border-radius: 8px; color: #856404; font-style: italic; }
-        .step-list { counter-reset: step; list-style: none; margin: 15px 0; }
-        .step-list li { counter-increment: step; margin-bottom: 10px; padding-left: 35px; position: relative; }
-        .step-list li::before { content: counter(step); position: absolute; left: 0; background: #667eea; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10pt; font-weight: 600; }
-        .bullet-list { margin: 10px 0 10px 20px; }
-        .bullet-list li { margin-bottom: 5px; }
-        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 10pt; }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        
+        /* Header */
+        .header { text-align: center; border-bottom: 2px solid #667eea; padding-bottom: 8px; margin-bottom: 10px; }
+        .header h1 { font-size: 18pt; color: #667eea; margin: 0; }
+        .header .subtitle { font-size: 10pt; color: #666; }
+        
+        /* Grid Layout */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }
+        .section { margin-bottom: 8px; }
+        .section-title { font-size: 11pt; font-weight: 700; color: #667eea; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin-bottom: 5px; }
+        
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin: 5px 0; }
+        th, td { border: 1px solid #ccc; padding: 4px 6px; text-align: left; }
         th { background: #667eea; color: white; font-weight: 600; }
-        tr:nth-child(even) { background: #f9f9f9; }
-        .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 20px 0; }
-        .feature-card { background: #f8f9fa; padding: 15px; border-radius: 8px; border: 1px solid #e9ecef; }
-        .feature-card h4 { color: #667eea; margin-bottom: 8px; font-size: 11pt; }
-        .feature-card p { font-size: 10pt; margin: 0; }
+        tr:nth-child(even) { background: #f5f5f5; }
+        
+        /* Lists */
+        ul { margin-left: 15px; }
+        li { margin-bottom: 2px; }
+        .step { background: #f0f4ff; padding: 3px 6px; border-radius: 3px; margin-bottom: 3px; border-left: 3px solid #667eea; }
+        
+        /* Buttons */
+        .btn-guide { display: flex; gap: 10px; margin: 8px 0; }
+        .btn-box { flex: 1; padding: 8px; border-radius: 5px; text-align: center; font-weight: 600; font-size: 9pt; }
+        .btn-red { background: #ffebee; border: 2px solid #e53935; color: #c62828; }
+        .btn-blue { background: #e3f2fd; border: 2px solid #1e88e5; color: #1565c0; }
+        
+        /* Warning Box */
+        .warning { background: #fff3cd; border: 1px solid #ffc107; padding: 5px; border-radius: 3px; font-size: 8.5pt; margin: 5px 0; }
+        .tip { background: #d4edda; border: 1px solid #28a745; padding: 5px; border-radius: 3px; font-size: 8.5pt; margin: 5px 0; }
+        
+        /* Footer */
+        .footer { position: absolute; bottom: 15mm; left: 15mm; right: 15mm; text-align: center; font-size: 8pt; color: #666; border-top: 1px solid #eee; padding-top: 5px; }
+        .qr-placeholder { width: 60px; height: 60px; background: #f0f0f0; border: 1px solid #ccc; display: inline-block; margin: 0 5px; vertical-align: middle; }
+        
+        /* Compact text */
+        .small { font-size: 8pt; }
+        .compact p { margin-bottom: 3px; }
     </style>
 </head>
 <body>
-    <!-- Cover Page -->
-    <div class="page">
-        <div class="cover">
-            <div class="cover-logo">wisoodkrub</div>
-            <div class="cover-model">WSKZ8</div>
-            <div class="cover-subtitle">เครื่องแปลภาษาอัจฉริยะ</div>
-            <div style="font-size:12pt; margin:20px 0; opacity:0.8;"><img src="wskz8-product.png" alt="WSKZ8" style="max-width:300px; border-radius:10px;"></div>
-            <div class="cover-tagline">"สื่อสารไร้พรมแดน พูดได้ทุกภาษา"</div>
-            <div style="margin-top:50px; font-size:10pt; opacity:0.7;">คู่มือการใช้งานฉบับที่ 1.0 | กุมภาพันธ์ 2026</div>
+
+<!-- PAGE 1 -->
+<div class="page">
+    <div class="header">
+        <h1>WSKZ8</h1>
+        <div class="subtitle">เครื่องแปลภาษาอัจฉริยะ | wisoodkrub</div>
+    </div>
+
+    <div class="grid-2">
+        <div class="section">
+            <div class="section-title">📋 สินค้าในกล่อง</div>
+            <ul class="small">
+                <li>ตัวเครื่อง WSKZ8</li>
+                <li>สายชาร์จ Type-C</li>
+                <li>อะแดปเตอร์ 5V/1A</li>
+                <li>สายคล้องคอ</li>
+                <li>คู่มือนี้</li>
+            </ul>
         </div>
-    </div>
-
-    <!-- Table of Contents -->
-    <div class="page">
-        <h1>📋 สารบัญ</h1>
-        <table>
-            <tr><td><strong>1.</strong> รู้จักกับ WSKZ8</td><td>3</td></tr>
-            <tr><td><strong>2.</strong> อุปกรณ์ในกล่อง</td><td>3</td></tr>
-            <tr><td><strong>3.</strong> เริ่มต้นใช้งาน</td><td>4</td></tr>
-            <tr><td><strong>4.</strong> การชาร์จแบตเตอรี่</td><td>4</td></tr>
-            <tr><td><strong>5.</strong> วิธีการใช้งานพื้นฐาน</td><td>5</td></tr>
-            <tr><td><strong>6.</strong> ฟีเจอร์หลัก</td><td>6</td></tr>
-            <tr><td><strong>7.</strong> การเชื่อมต่อ WiFi/Bluetooth</td><td>7</td></tr>
-            <tr><td><strong>8.</strong> การอัพเดทซอฟต์แวร์</td><td>8</td></tr>
-            <tr><td><strong>9.</strong> การดูแลรักษา</td><td>8</td></tr>
-            <tr><td><strong>10.</strong> แก้ไขปัญหาเบื้องต้น</td><td>9</td></tr>
-            <tr><td><strong>11.</strong> ข้อมูลท_technical_</td><td>10</td></tr>
-            <tr><td><strong>12.</strong> การติดต่อสอบถาม</td><td>10</td></tr>
-        </table>
-    </div>
-
-    <!-- Introduction -->
-    <div class="page">
-        <h1>👋 1. รู้จักกับ WSKZ8</h1>
-        <p>ขอบคุณที่เลือกใช้ <strong>WSKZ8</strong> เครื่องแปลภาษาอัจฉริยะจาก wisoodkrub ออกแบบมาเพื่อให้การสื่อสารข้ามภาษาเป็นเรื่องง่าย</p>
         
-        <div class="highlight-box">
-            <strong>✨ จุดเด่น:</strong>
-            <ul class="bullet-list">
-                <li>แปลภาษา Real-time [จำนวน] ภาษา</li>
-                <li>ระบบ AI แม่นยำสูง</li>
-                <li>ใช้งานง่าย พกพาสะดวก</li>
-                <li>แบตเตอรี่ [จำนวน] ชั่วโมง</li>
-            </ul>
+        <div class="section">
+            <div class="section-title">⚡ สเปคเครื่อง</div>
+            <table>
+                <tr><td>แบตเตอรี่</td><td>1500 mAh</td></tr>
+                <tr><td>ขนาด</td><td>118×50×13.5 mm</td></tr>
+                <tr><td>น้ำหนัก</td><td>100 กรัม</td></tr>
+                <tr><td>หน้าจอ</td><td>3" IPS Touch</td></tr>
+                <tr><td>สแตนด์บาย</td><td>7 วัน</td></tr>
+                <tr><td>ภาษา</td><td>109 ภาษา (ออนไลน์)</td></tr>
+            </table>
         </div>
-
-        <h1>📦 2. อุปกรณ์ในกล่อง</h1>
-        <table>
-            <tr><th>รายการ</th><th>จำนวน</th></tr>
-            <tr><td>ตัวเครื่อง WSKZ8</td><td>1 เครื่อง</td></tr>
-            <tr><td>สายชาร์จ Type-C USB</td><td>1 เส้น</td></tr>
-            <tr><td>อะแดปเตอร์ชาร์จ 5V/1A</td><td>1 ชิ้น</td></tr>
-            <tr><td>สายคล้องคอ</td><td>1 เส้น</td></tr>
-            <tr><td>คู่มือการใช้งาน</td><td>1 เล่ม</td></tr>
-        </table>
     </div>
 
-    <!-- Getting Started -->
-    <div class="page">
-        <h1>🚀 3. เริ่มต้นใช้งาน</h1>
-        <ol class="step-list">
-            <li>ชาร์จแบตเตอรี่ให้เต็ม (ประมาณ 1 ชั่วโมง)</li>
-            <li>กดปุ่มเปิด/ปิดค้างไว้ประมาณ 3 วินาที</li>
-            <li>รอหน้าจอแสดงผลติดขึ้นมา</li>
-            <li>เลือกภาษาที่ต้องการใช้งาน (12 ภาษา)</li>
-            <li>เชื่อมต่อ WiFi หรือ Hotspot (ดูวิธีในหัวข้อ 7)</li>
-            <li>เลือกคู่ภาษาแปลแล้วเริ่มใช้งานได้เลย!</li>
-        </ol>
-        <div class="highlight-box">
-            <strong>📱 ส่วนประกอบเครื่อง:</strong>
-            <ul class="bullet-list">
-                <li><strong>ปุ่มเปิด/ปิด (Power):</strong> อยู่ด้านข้าง กดค้าง 3 วินาทีเพื่อเปิด/ปิด</li>
-                <li><strong>ปุ่มแปลภาษาที่ 1 (สีแดง):</strong> กดค้างแล้วพูดภาษาต้นทาง</li>
-                <li><strong>ปุ่มแปลภาษาที่ 2 (สีน้ำเงิน/เงิน):</strong> กดค้างแล้วพูดภาษาปลายทาง</li>
-                <li><strong>หน้าจอทัชสกรีน 3 นิ้ว:</strong> สไลด์เลือกฟังก์ชั่น หรือกดเลือกเมนู</li>
-                <li><strong>กล้อง:</strong> อยู่ด้านหลังเครื่อง สำหรับถ่ายรูปแปล</li>
-                <li><strong>ลำโพง:</strong> อยู่ด้านหน้าเครื่อง</li>
-                <li><strong>ช่องชาร์จ Type-C:</strong> อยู่ด้านล่างเครื่อง</li>
-                <li><strong>ช่องใส่สายคล้องคอ:</strong> อยู่มุมเครื่อง</li>
-            </ul>
+    <div class="section">
+        <div class="section-title">🚀 เริ่มใช้งานครั้งแรก (3 นาที)</div>
+        <div class="step"><strong>1.</strong> ชาร์จเครื่อง 1 ชม (จนเต็ม)</div>
+        <div class="step"><strong>2.</strong> กดปุ่มเปิด/ปิดค้าง 3 วินาที</div>
+        <div class="step"><strong>3.</strong> เลือกภาษาเมนู (ไทย/อังกฤษ/จีน)</div>
+        <div class="step"><strong>4.</strong> เชื่อมต่อ WiFi: การตั้งค่า → WLAN → เลือก WiFi → ใส่รหัส</div>
+        <div class="step"><strong>5.</strong> เลือกคู่ภาษาแปล แล้วเริ่มใช้งาน!</div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">🎮 ปุ่มควบคุมหลัก</div>
+        <div class="btn-guide">
+            <div class="btn-box btn-red">
+                <div>🔴 ปุ่มสีแดง</div>
+                <div class="small">ภาษาที่ 1</div>
+                <div class="small">(ต้นทาง)</div>
+            </div>
+            <div class="btn-box btn-blue">
+                <div>🔵 ปุ่มสีน้ำเงิน</div>
+                <div class="small">ภาษาที่ 2</div>
+                <div class="small">(ปลายทาง)</div>
+            </div>
+        </div>
+        <div class="tip">
+            <strong>วิธีใช้:</strong> กดปุ่มสีแดงค้าง → พูด → ปล่อย = แปลเป็นภาษาที่ 2 | กดปุ่มสีน้ำเงิน = แปลกลับ
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">🌐 ภาษาที่รองรับ</div>
+        <div class="grid-2">
+            <div>
+                <strong>ออนไลน์ (109 ภาษา):</strong><br>
+                <span class="small">ไทย, อังกฤษ, จีน, ญี่ปุ่น, เกาหลี, ฝรั่งเศส, เยอรมัน, สเปน, อิตาลี, รัสเซีย, อาหรับ, ฮินดี, และอื่นๆ</span>
+            </div>
+            <div>
+                <strong>ออฟไลน์ (10 ภาษา):</strong><br>
+                <span class="small">ไทย, จีนกลาง, อังกฤษ, ญี่ปุ่น, ฝรั่งเศส, เยอรมัน, สเปน, รัสเซีย, เกาหลี, ไต้หวัน</span>
+            </div>
+        </div>
+        <div class="warning">
+            <strong>⚠️ หมายเหตุ:</strong> แปลออฟไลน์ความแม่นยำน้อยกว่า แนะนำใช้ออนไลน์เป็นหลัก | ไม่รองรับ WiFi ที่ต้องยืนยันตัวตน 2 ชั้น (ใช้ Hotspot แทน)
+        </div>
+    </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+    <div class="header">
+        <h1>WSKZ8</h1>
+        <div class="subtitle">ฟีเจอร์เสริม & แก้ปัญหา | wisoodkrub</div>
+    </div>
+
+    <div class="grid-2">
+        <div class="section">
+            <div class="section-title">📷 แปลด้วยการถ่ายรูป (45 ภาษา)</div>
+            <ol class="small">
+                <li>เลือก "การแปลด้วยถ่ายรูป"</li>
+                <li>เลือกภาษาต้นทาง → ปลายทาง</li>
+                <li>กดปุ่มกล้อง ถ่ายข้อความ</li>
+                <li>เครื่องแปลให้ทันที</li>
+            </ol>
+            <div class="tip">เหมาะสำหรับ: เมนูอาหาร, ป้ายบอกทาง, เอกสาร</div>
         </div>
 
-        <h1>🔋 4. การชาร์จแบตเตอรี่</h1>
-        <div class="highlight-box">
-            <strong>🔌 วิธีชาร์จ:</strong>
-            <ol class="step-list">
-                <li>เสียบสายชาร์จ Type-C เข้าช่องชาร์จด้านล่างเครื่อง</li>
-                <li>เสียบอีกด้านเข้าอะแดปเตอร์ 5V/1A</li>
-                <li>ชาร์จประมาณ 1 ชั่วโมงจนแบตเตอรี่เต็ม</li>
-                <li>สถานะแบตเตอรี่จะแสดงที่หน้าจอ</li>
+        <div class="section">
+            <div class="section-title">🎙️ บันทึกเสียงพร้อมแปล</div>
+            <ol class="small">
+                <li>เลือก "บันทึกเสียง"</li>
+                <li>เลือกภาษาจีนหรืออังกฤษเป็นต้นทาง</li>
+                <li>กดไมค์ พูด → กดหยุด → บันทึก</li>
+                <li>ฟังย้อนหลังที่รายการบันทึก</li>
             </ol>
         </div>
-        <div class="tip-box">💡 ชาร์จครั้งแรกควรเต็ม 100%</div>
     </div>
 
-    <!-- Basic Usage -->
-    <div class="page">
-        <h1>🗣️ 5. วิธีการใช้งานพื้นฐาน</h1>
-        <div class="feature-grid">
-            <div class="feature-card"><h4>🎤 โหมดพูด</h4><p>พูดเข้าไมค์ เครื่องแปลทันที</p></div>
-            <div class="feature-card"><h4>⌨️ โหมดพิมพ์</h4><p>พิมพ์ข้อความผ่านหน้าจอ</p></div>
-            <div class="feature-card"><h4>📷 โหมดกล้อง</h4><p>ถ่ายรูปแปลป้าย แผนที่</p></div>
-            <div class="feature-card"><h4>👥 โหมดกลุ่ม</h4><p>สนทนาหลายคนพร้อมกัน</p></div>
-        </div>
-        <h2>ขั้นตอนการใช้งานแปลภาษา (พื้นฐาน)</h2>
-        <ol class="step-list">
-            <li>เลือกคู่ภาษาที่ต้องการแปล โดย:<br>
-                - ภาษาที่ 1 (สีแดง): แตะที่ชื่อภาษาแล้วเลื่อนเลือก<br>
-                - ภาษาที่ 2 (สีน้ำเงิน): แตะที่ชื่อภาษาแล้วเลื่อนเลือก</li>
-            <li>กดปุ่มสีแดงค้างไว้ พร้อมพูดภาษาต้นทาง พอพูดจบค่อยปล่อยปุ่ม</li>
-            <li>เครื่องจะแปลเป็นภาษาปลายทางและพูดออกลำโพงทันที</li>
-            <li>กรณีให้อีกฝ่ายพูดกลับ ให้กดปุ่มสีน้ำเงินค้าง แล้วพูด</li>
-            <li>เครื่องจะแปลกลับเป็นภาษาต้นทางให้ทันที</li>
-        </ol>
-        
-        <div class="tip-box">
-            <strong>💡 เคล็ดลับ:</strong> หากต้องการลบข้อความแปลที่เคยพูดไว้ ให้กดที่ข้อความนั้นค้างไว้ แล้วเลือกลบ
-        </div>
-        
-        <h2>ฟีเจอร์เสริม</h2>
-        <div class="feature-grid">
-            <div class="feature-card">
-                <h4>🎙️ บันทึกเสียงพร้อมแปล</h4>
-                <p>บันทึกการสนทนาเป็นไฟล์เสียง พร้อมข้อความแปล</p>
-            </div>
-            <div class="feature-card">
-                <h4>📷 แปลด้วยการถ่ายรูป</h4>
-                <p>รองรับ 45 ภาษา ถ่ายป้าย เมนู เอกสาร แปลได้ทันที</p>
-            </div>
-            <div class="feature-card">
-                <h4>💾 แปลออฟไลน์</h4>
-                <p>ใช้งานได้ไม่ต้องต่อเน็ต 10 ภาษาหลัก (ฉุกเฉิน)</p>
-            </div>
-            <div class="feature-card">
-                <h4>📱 ความเร็ว 0.3 วินาที</h4>
-                <p>แปลแบบ Real-time เร็วทันใจ</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Features -->
-    <div class="page">
-        <h1>⭐ 6. ฟีเจอร์หลัก</h1>
-        
-        <h2>1. บันทึกเสียงพร้อมแปล</h2>
-        <ol class="step-list">
-            <li>เลือกปุ่ม "บันทึกเสียง"</li>
-            <li>เลือกภาษาต้นทาง (รองรับภาษาจีนและอังกฤษ)<br>
-                - ภาษาต้นทาง: แตะชื่อภาษาสีแดงด้านบน<br>
-                - ภาษาปลายทาง: แตะชื่อภาษาสีน้ำเงินด้านบน</li>
-            <li>กดปุ่มรูปไมโครโฟน แล้วเริ่มพูด</li>
-            <li>กดปุ่มหยุดเมื่อพูดเสร็จ แล้วเลือกบันทึกเสียง</li>
-            <li>เลือกปุ่มรายการ (list) มุมบนขวา เพื่อฟังย้อนหลัง</li>
-            <li>เลือกไฟล์ที่บันทึกไว้ แล้วกดปุ่มไมโครโฟนเพื่อฟัง</li>
-        </ol>
-        
-        <h2>2. การแปลด้วยการถ่ายรูป</h2>
-        <ol class="step-list">
-            <li>เลือกปุ่ม "การแปลด้วยถ่ายรูป"</li>
-            <li>เลือกภาษาต้นทาง (ด้านซ้ายบน)</li>
-            <li>เลือกภาษาปลายทาง (ด้านขวาบน)</li>
-            <li>กดปุ่มรูปกล้องเพื่อถ่ายภาพข้อความ</li>
-            <li>เครื่องจะแปลเป็นภาษาปลายทางให้ทันที</li>
-        </ol>
-        <div class="tip-box">
-            <strong>💡 รองรับ 45 ภาษา</strong> สำหรับการแปลรูปภาพ เหมาะสำหรับอ่านป้าย เมนูอาหาร เอกสาร
-        </div>
-        
-        <h2>3. การแปลแบบออฟไลน์</h2>
-        <div class="warning-box">
-            <strong>⚠️ สำคัญ:</strong> การแปลแบบออฟไลน์มีความเร็วและความแม่นยำจำกัดกว่าการใช้งานแบบออนไลน์ ควรใช้ในกรณีฉุกเฉินเท่านั้น
-        </div>
-        <ol class="step-list">
-            <li>เลือกปุ่ม "การแปลแบบออฟไลน์"</li>
-            <li>เลือกภาษาต้นทาง (ตัวหนังสือสีแดง)</li>
-            <li>เลือกภาษาปลายทาง (ตัวหนังสือสีน้ำเงิน)</li>
-            <li>กดปุ่มสีแดงพูดภาษาต้นทาง หรือกดปุ่มสีน้ำเงินให้อีกฝ่ายพูด</li>
-        </ol>
-        
-        <h2>ภาษาที่รองรับ</h2>
-        <div class="highlight-box">
-            <strong>🌐 ออนไลน์ (ผ่าน WiFi):</strong> รองรับ <strong>109 ภาษา</strong> ทั่วโลก<br><br>
-            <strong>💾 ออฟไลน์ (ไม่ต้องใช้อินเทอร์เน็ต):</strong> รองรับ <strong>10 ภาษาหลัก</strong>
-        </div>
-        
-        <h3>ภาษาออฟไลน์ที่รองรับ</h3>
-        <table>
-            <tr><th>ภาษา</th><th>ใช้งาน</th></tr>
-            <tr><td>🇹🇭 ไทย</td><td>พูด-ฟัง ได้ทันที</td></tr>
-            <tr><td>🇨🇳 จีนกลาง ( Mandarin )</td><td>พูด-ฟัง ได้ทันที</td></tr>
-            <tr><td>🇬🇧 อังกฤษ</td><td>พูด-ฟัง ได้ทันที</td></tr>
-            <tr><td>🇯🇵 ญี่ปุ่น</td><td>พูด-ฟัง ได้ทันที</td></tr>
-            <tr><td>🇫🇷 ฝรั่งเศส</td><td>พูด-ฟัง ได้ทันที</td></tr>
-            <tr><td>🇩🇪 เยอรมัน</td><td>พูด-ฟัง ได้ทันที</td></tr>
-            <tr><td>🇪🇪 สเปน</td><td>พูด-ฟัง ได้ทันที</td></tr>
-            <tr><td>🇷🇺 รัสเซีย</td><td>พูด-ฟัง ได้ทันที</td></tr>
-            <tr><td>🇰🇷 เกาหลี</td><td>พูด-ฟัง ได้ทันที</td></tr>
-            <tr><td>🇹🇼 ไต้หวัน</td><td>พูด-ฟัง ได้ทันที</td></tr>
-        </table>
-        
-        <div class="warning-box">
-            <strong>⚠️ หมายเหตุ:</strong> การแปลแบบออฟไลน์จะมีความเร็วและความแม่นยำจำกัดกว่าการใช้งานแบบออนไลน์ แนะนำให้ใช้การแปลแบบออนไลน์เป็นหลัก
-        </div>
-    </div>
-
-    <!-- Connectivity -->
-    <div class="page">
-        <h1>📡 7. การเชื่อมต่อ WiFi/Bluetooth</h1>
-        <h2>เชื่อมต่อ WiFi</h2>
-        <ol class="step-list">
-            <li>เปิดเครื่อง WSKZ8</li>
-            <li>เข้าเมนู "การตั้งค่า" → "WiFi"</li>
-            <li>เลือกชื่อเครือข่าย</li>
-            <li>ใส่รหัสผ่าน</li>
-            <li>กด "เชื่อมต่อ"</li>
-        </ol>
-        <div class="placeholder">[บอสช่วยเติม: Bluetooth เชื่อมกับอะไรได้บ้าง?]</div>
-    </div>
-
-    <!-- Update & Maintenance -->
-    <div class="page">
-        <h1>🔄 8. การอัพเดทซอฟต์แวร์</h1>
-        <ol class="step-list">
-            <li>เชื่อมต่อ WiFi (ดูวิธีในหัวข้อ 7)</li>
-            <li>เข้าเมนู "การตั้งค่า" → "เกี่ยวกับ" → "อัพเดทซอฟต์แวร์"</li>
-            <li>กด "ตรวจสอบการอัพเดท"</li>
-            <li>หากพบเวอร์ชันใหม่ กด "ดาวน์โหลด"</li>
-            <li>รอจนการดาวน์โหลดเสร็จสิ้น</li>
-            <li>กด "ติดตั้ง" และรอเครื่องรีสตาร์ท</li>
-        </ol>
-        <div class="warning-box">⚠️ อย่าปิดเครื่องระหว่างการอัพเดท อาจทำให้เครื่องเสียหายได้</div>
-
-        <h1>🧹 9. การดูแลรักษา</h1>
-        <h2>การทำความสะอาด</h2>
-        <ul class="bullet-list">
-            <li>ใช้ผ้าไมโครไฟเบอร์แห้งเช็ดทำความสะอาดตัวเครื่อง</li>
-            <li>หลีกเลี่ยงการใช้น้ำหรือของเหลวทำความสะอาดโดยตรง</li>
-            <li>หลีกเลี่ยงความชื้นสูงหรือฝุ่นละอองมาก</li>
-        </ul>
-        
-        <h2>การตั้งค่าเครื่อง</h2>
-        <p>เข้าเมนู "การตั้งค่า" เพื่อปรับแต่ง:</p>
-        <table>
-            <tr><th>เมนู</th><th>ฟังก์ชั่น</th></tr>
-            <tr><td>WLAN</td><td>ตั้งค่า WiFi / Hotspot WiFi</td></tr>
-            <tr><td>Bluetooth</td><td>เชื่อมต่อหูฟังหรือลำโพง (สำหรับฟังย้อนหลัง)</td></tr>
-            <tr><td>นอนหลับ</td><td>ตั้งเวลาหน้าจอดับ: 30 วิ / 1 นาที / 3 นาที / ไม่ดับ</td></tr>
-            <tr><td>ภาษาระบบ</td><td>เลือกภาษาเมนู (รองรับ 12 ภาษา)</td></tr>
-            <tr><td>ล้างข้อมูล</td><td>ลบประวัติการแปลทั้งหมด</td></tr>
-            <tr><td>เกี่ยวกับ</td><td>ดูหมายเลขเครื่องและเวอร์ชั่น</td></tr>
+    <div class="section">
+        <div class="section-title">⚙️ การตั้งค่า (การตั้งค่า → ...)</div>
+        <table class="small">
+            <tr>
+                <td><strong>WLAN</strong></td><td>เชื่อมต่อ WiFi / Hotspot</td>
+                <td><strong>Bluetooth</strong></td><td>เชื่อมหูฟัง (ฟังย้อนหลัง)</td>
+            </tr>
+            <tr>
+                <td><strong>นอนหลับ</strong></td><td>ตั้งเวลาดับจอ (30วิ/1นาที/3นาที/ไม่ดับ)</td>
+                <td><strong>ภาษาระบบ</strong></td><td>เลือกภาษาเมนู (12 ภาษา)</td>
+            </tr>
+            <tr>
+                <td><strong>ล้างข้อมูล</strong></td><td>ลบประวัติการแปล</td>
+                <td><strong>อัพเดท</strong></td><td>ตรวจสอบเวอร์ชั่นใหม่</td>
+            </tr>
         </table>
     </div>
 
-    <!-- Troubleshooting -->
-    <div class="page">
-        <h1>🔧 10. แก้ไขปัญหาเบื้องต้น</h1>
+    <div class="section">
+        <div class="section-title">🔧 แก้ไขปัญหาเบื้องต้น</div>
         <table>
-            <tr><th>อาการ</th><th>สาเหตุ</th><th>วิธีแก้</th></tr>
-            <tr><td>เปิดไม่ติด</td><td>แบตเตอรี่หมด</td><td>ชาร์จเครื่องอย่างน้อย 30 นาที</td></tr>
-            <tr><td>แปลไม่ออก</td><td>ไม่มีอินเทอร์เน็ต</td><td>เชื่อมต่อ WiFi หรือ Hotspot</td></tr>
-            <tr><td>แปลช้า/ผิด</td><td>สัญญาณ WiFi อ่อน</td><td>ย้ายไปใกล้เราเตอร์ หรือใช้ออฟไลน์</td></tr>
-            <tr><td>เสียงไม่ออก</td><td>ลำโพงเงียบ</td><td>เพิ่มระดับเสียงที่หน้าจอ</td></tr>
-            <tr><td>หน้าจอดับ</td><td>โหมดสแตนด์บาย</td><td>กดปุ่มเปิด/ปิดสั้น ๆ</td></tr>
-            <tr><td>ถ่ายรูปไม่ชัด</td><td>แสงน้อย</td><td>ถ่ายในที่แสงสว่างเพียงพอ</td></tr>
+            <tr><th>อาการ</th><th>วิธีแก้</th></tr>
+            <tr><td>เปิดไม่ติด</td><td>ชาร์จเครื่องอย่างน้อย 30 นาที</td></tr>
+            <tr><td>แปลไม่ออก</td><td>เชื่อมต่อ WiFi ใหม่ / ใช้ออฟไลน์</td></tr>
+            <tr><td>แปลช้า/ผิด</td><td>ย้ายใกล้เราเตอร์ / สัญญาณ WiFi อ่อน</td></tr>
+            <tr><td>เสียงไม่ออก</td><td>เพิ่มระดับเสียงที่หน้าจอ</td></tr>
+            <tr><td>หน้าจอดับ</td><td>กดปุ่มเปิด/ปิดสั้น ๆ 1 ครั้ง</td></tr>
+            <tr><td>ถ่ายรูปไม่ชัด</td><td>ถ่ายในที่แสงสว่างเพียงพอ</td></tr>
         </table>
-        
-        <div class="warning-box">
-            <strong>⚠️ ข้อควรระวัง:</strong>
-            <ul class="bullet-list">
-                <li>เครื่องไม่รองรับ WiFi ที่ต้องยืนยันตัวตน 2 ชั้น (เช่น WiFi โรงแรมบางแห่ง)</li>
-                <li>ควรใช้ Hotspot จากมือถือแทนในกรณีนี้</li>
-                <li>อย่าให้เครื่องตกน้ำหรือโดนความชื้นสูง</li>
+    </div>
+
+    <div class="grid-2">
+        <div class="section">
+            <div class="section-title">⚠️ ข้อควรระวัง</div>
+            <ul class="small">
+                <li>อย่าให้เครื่องตกน้ำหรือโดนความชื้น</li>
+                <li>ใช้อะแดปเตอร์ 5V/1A ที่แถมมาเท่านั้น</li>
+                <li>ไม่รองรับ WiFi ยืนยันตัวตน 2 ชั้น</li>
+                <li>อย่าปิดเครื่องระหว่างอัพเดทซอฟต์แวร์</li>
+                <li>ชาร์จก่อนแบตหมดสนิท (แบตเสื่อมช้า)</li>
             </ul>
         </div>
-    </div>
 
-    <!-- Specs & Contact -->
-    <div class="page">
-        <h1>📊 11. ข้อมูลท_technical_</h1>
-        <table>
-            <tr><td><strong>รุ่น</strong></td><td>WSKZ8 (wisoodkrub VT_THoffline2023)</td></tr>
-            <tr><td><strong>แบตเตอรี่</strong></td><td>1500 mAh</td></tr>
-            <tr><td><strong>การใช้งาน</strong></td><td>Standby 7 วัน</td></tr>
-            <tr><td><strong>หน้าจอ</strong></td><td>3 นิ้ว IPS Touch Panel (480x854)</td></tr>
-            <tr><td><strong>ขนาด</strong></td><td>118 x 50 x 13.5 mm</td></tr>
-            <tr><td><strong>น้ำหนัก</strong></td><td>100 กรัม</td></tr>
-            <tr><td><strong>ช่องชาร์จ</strong></td><td>Type-C USB</td></tr>
-            <tr><td><strong>การเชื่อมต่อ</strong></td><td>WiFi / Hotspot WiFi</td></tr>
-            <tr><td><strong>ลำโพง</strong></td><td>BOX Speaker</td></tr>
-            <tr><td><strong>วัสดุ</strong></td><td>ABS + Nano Plastic</td></tr>
-            <tr><td><strong>มาตรฐาน</strong></td><td>CE, RoHS, FCC, CB</td></tr>
-            <tr><td><strong>การรับประกัน</strong></td><td>1 ปีเต็ม</td></tr>
-        </table>
-
-        <h1>📞 12. การติดต่อสอบถาม</h1>
-        <div class="highlight-box">
-            <strong>wisoodkrub</strong><br><br>
-            💬 LINE: @wisoodkrub (มี @ ด้วย)<br>
-            🌐 Website: wisoodkrub.com<br>
-            🎥 คลิปสอนใช้งาน: สแกน QR Code หรือแอดไลน์<br><br>
-            <div style="background: white; padding: 10px; border-radius: 5px; display: inline-block;">
-                <img src="wskz8-qr-code.png" alt="LINE @wisoodkrub" style="width: 150px; height: 150px;">
-            </div><br><br>
-            <strong>✅ รับประกันสินค้า 1 ปีเต็ม</strong><br>
-            <em>หากมีปัญหาการใช้งาน ติดต่อสอบถามเพิ่มเติมได้ทาง LINE ได้เลยครับ</em>
+        <div class="section">
+            <div class="section-title">📞 ติดต่อสอบถาม</div>
+            <div style="text-align: center; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                <div style="font-size: 12pt; font-weight: 700; color: #667eea; margin-bottom: 5px;">wisoodkrub</div>
+                <div class="small">LINE: <strong>@wisoodkrub</strong> (มี @)</div>
+                <div class="small">Website: wisoodkrub.com</div>
+                <div style="margin-top: 5px;">
+                    <div class="qr-placeholder"></div>
+                    <div class="small">สแกนเพิ่มเพื่อน</div>
+                </div>
+                <div style="margin-top: 5px; color: #28a745; font-weight: 600;">✅ รับประกัน 1 ปีเต็ม</div>
+            </div>
         </div>
     </div>
+
+    <div class="footer">
+        คู่มือฉบับสรุป WSKZ8 | wisoodkrub | กุมภาพันธ์ 2026
+    </div>
+</div>
+
 </body>
 </html>
